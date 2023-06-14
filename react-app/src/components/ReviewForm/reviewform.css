@@ -1,0 +1,17 @@
+.empty {
+    color: lightgray;
+}
+
+.filled {
+    color: orange;
+}
+
+.stars-for-rating {
+    display: flex;
+}
+
+
+.choose-option {
+    display: flex;
+    flex-direction: column;
+}

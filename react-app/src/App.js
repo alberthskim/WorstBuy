@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import SingleProductPage from "./components/SingleProductPage";
 import AllProductPage from "./components/AllProductsPage";
+import ReviewForm from "./components/ReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,8 +28,11 @@ function App() {
           <Route exact path="/products">
             <AllProductPage />
           </Route>
-          <Route path="/products/:productId">
+          <Route exact path="/products/:productId">
             <SingleProductPage />
+          </Route>
+          <Route exact path="/products/:productId/reviews">
+            <ReviewForm />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

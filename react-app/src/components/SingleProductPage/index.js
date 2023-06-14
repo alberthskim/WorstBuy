@@ -2,17 +2,23 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { allProductsThunk, singleProductThunk} from "../../store/product";
 // import './landingpage.css'
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function SingleProductPage() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { productId } = useParams();
     const products = useSelector(state => state.products[productId])
-    console.log("THIS IS MY PRODUCTS", products)
 
     useEffect(() => {
         dispatch(allProductsThunk())
     }, [dispatch])
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        history.push(`/products/${productId}/reviews`)
+        return;
+    }
 
     if (!products) return <div>Loading...</div>
 
@@ -57,7 +63,7 @@ function SingleProductPage() {
                             </div>
                             <div className="review-images-area">
                                 <p>Map all the review images here</p>
-                                <button>Write a Review</button>
+                                <button onClick={handleClick}>Write a Review</button>
                             </div>
                         </div>
                     </div>

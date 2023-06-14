@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { allProductsThunk } from "../../store/product";
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import './landingpage.css'
 
 function LandingPage() {
@@ -50,10 +50,12 @@ function LandingPage() {
                 <div className="top-right">
                     <h2>Recommended For You</h2>
                     {fourRandomProducts.map((product) => (
-                        <div className="picture-area">
-                            <img className="pics" src={product.imageUrl}></img>
-                            <span>{product.name}</span>
-                        </div>
+                        <Link to ={`/products/${product.id}`} className="random-link">
+                            <div className="picture-area">
+                                <img className="pics" src={product.imageUrl}></img>
+                                <span>{product.name}</span>
+                            </div>
+                        </Link>
                     ))}
                 </div>
                 <div className="middle-bottom-left">
