@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Product, Review
+from app.models import db, Product, Review, ProductImage
 from app.forms import ReviewForm
 
 product_routes = Blueprint('products', __name__)
@@ -18,16 +18,25 @@ def all_products():
 
     #Grabs All Review
     reviews = Review.query.all()
+
+    #Grabs ALL Product Images
+    product_images = ProductImage.query.all()
     product_list = [product.to_dict() for product in products]
     review_list = [review.to_dict() for review in reviews]
+    product_images_list = [images.to_dict() for images in product_images]
 
     #Iterate through to get the amount of reviews for front page
     for product in product_list:
         review_dict = []
+        product_images_dict = []
         for review in review_list:
             if product['id'] == review['productId']:
                 review_dict.append(review)
                 product['reviews'] = review_dict
+        for image in product_images_list:
+            if product['id'] == image['productId']:
+                product_images_dict.append(image)
+                product['productImages'] = product_images_dict
 
     #return normalized list
     normalized_obj = {}
@@ -38,28 +47,28 @@ def all_products():
     return normalized_obj
 
 
-@product_routes.route('/<int:productId>')
-def single_product(productId):
-    """
-    Query for a single product with its images and reviews
-    """
+# @product_routes.route('/<int:productId>')
+# def single_product(productId):
+#     """
+#     Query for a single product with its images and reviews
+#     """
 
-    #Grab the single product by its id
-    product = Product.query.get(productId)
-    product_dict = product.to_dict()
+#     #Grab the single product by its id
+#     product = Product.query.get(productId)
+#     product_dict = product.to_dict()
 
-    product_review = product.reviews
-    product_review_dict = [review.to_dict() for review in product_review]
+#     product_review = product.reviews
+#     product_review_dict = [review.to_dict() for review in product_review]
 
 
-    #Grab the product images related to the product
-    product_images = product.product_images
-    product_images_dict = [image.to_dict() for image in product_images]
+#     #Grab the product images related to the product
+#     product_images = product.product_images
+#     product_images_dict = [image.to_dict() for image in product_images]
 
-    product_dict['productImages'] = product_images_dict
-    product_dict['reviews'] = product_review_dict
+#     product_dict['productImages'] = product_images_dict
+#     product_dict['reviews'] = product_review_dict
 
-    return product_dict
+#     return product_dict
 
 
 
