@@ -28,5 +28,6 @@ class Product(db.Model):
             "model": self.model,
             "category": self.category,
             "price": self.price,
-            "imageUrl": self.image_url
+            "imageUrl": self.image_url,
+            "reviews": {}
         }
