@@ -38,33 +38,52 @@ function LandingPage() {
     const fourRandomProducts = getRandomProducts(products)
 
     return (
-        <div className="landing-page">
-            <div className="landingpage-content">
-                <div className="left-side">
+        <div className="whole-landing-page">
+
+
+
+            <div className="left-side-content">
+
                     <h2>Welcome To Worst Buy</h2>
                     <p>Browse for the worst things you can possibly purchase ever!</p>
                     <div className="shop-now-button">
-                        <button onClick={handleClick}>Shop Now</button>
+                        <button className="shop-now" onClick={handleClick}>Shop Now</button>
+                    </div>
+
+            </div>
+
+
+
+            <div className="right-side-content">
+
+                <div className="top-container">
+                    <h2 className="recomended-header">Recommended For You</h2>
+                    <div className="whole-mapped-list">
+                        {fourRandomProducts.map((product) => (
+                            <div className="mapped-individual-products">
+                                <Link to ={`/products/${product.id}`} className="random-link">
+                                    <img className="pics" src={product.imageUrl} alt="random"></img>
+                                    <span className="product-name">{product.name}</span>
+                                </Link>
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className="top-right">
-                    <h2>Recommended For You</h2>
-                    {fourRandomProducts.map((product) => (
-                        <Link to ={`/products/${product.id}`} className="random-link">
-                            <div className="picture-area">
-                                <img className="pics" src={product.imageUrl} alt="random"></img>
-                                <span>{product.name}</span>
-                            </div>
-                        </Link>
-                    ))}
+
+                <div className="bottom-container">
+                    <div className="bottom-left-side">
+                        <h2>Insert Something Here</h2>
+                    </div>
+
+                    <div className="bottom-right-side">
+                        <h2>Insert Something Here</h2>
+                    </div>
                 </div>
-                <div className="middle-bottom-left">
-                    <h2>Insert Something Here</h2>
-                </div>
-                <div className="bottom-right">
-                    <h2>Insert Something Here</h2>
-                </div>
+
             </div>
+
+
+
         </div>
     )
 }

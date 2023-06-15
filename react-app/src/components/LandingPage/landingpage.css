@@ -1,8 +1,121 @@
 .pics {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
 }
 
 .random-link {
     text-decoration: none;
+}
+
+.whole-landing-page {
+    display: flex;
+    height: 100vh;
+    margin: 1.5rem;
+    /* border: 10px solid black; */
+    gap: 1rem;
+}
+
+.left-side-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    /* border: 5px solid red; */
+    border: 1px solid gray;
+    gap: 1rem;
+}
+
+.shop-now {
+    background-color: blue;
+    color: white;
+    padding: .5rem;
+}
+
+.right-side-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    height: 100%;
+    gap: .5rem;
+    /* border: 5px solid purple; */
+    /* border: 1px solid gray; */
+}
+
+.top-container {
+    /* height: 40%; */
+    padding-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    /* border: 5px solid blue; */
+    /* margin: 0; */
+    border: 1px solid gray;
+}
+
+
+.whole-mapped-list {
+    /* width: 100%; */
+    display: flex;
+    gap: 1rem;
+    /* border: 5px solid green; */
+    /* border: 1px solid gray; */
+}
+
+.random-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.mapped-individual-products {
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+    /* border: 5px solid orange */
+    /* border: 1px solid gray; */
+}
+
+.bottom-container {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    gap: 1rem;
+    /* border: 5px solid red; */
+}
+
+.bottom-left-side {
+    width: 50%;
+    /* border: 5px solid blue */
+    border: 1px solid gray;
+}
+
+.bottom-right-side {
+    width: 50%;
+    /* border: 5px solid blue */
+    border: 1px solid gray;
+}
+
+.mapped-products {
+    display: flex;
+}
+
+/* .random-link {
+    display: flex;
+    flex-direction: column;
+} */
+
+.picture-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.whole-mapped-list {
+    display: flex;
+}
+
+.mapped-individual-products {
+    display: flex;
+    flex-direction: column;
 }
