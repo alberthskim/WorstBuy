@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { allProductsThunk } from "../../store/product";
-import './reviewform.css'
-import { createReviewThunk } from "../../store/review";
+import { updateReviewThunk } from "../../store/review";
 
-function ReviewForm() {
+function EditReviewForm() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { productId } = useParams()
-    const user = useSelector(state => state.session.user)
-    const products = useSelector(state => state.products[productId])
+    const { productId, reviewId } = useParams()
 
     const [rating, setRating] = useState(1)
     const [stars, setStars] = useState("")
@@ -26,11 +22,6 @@ function ReviewForm() {
     const [displayName, setDisplayName] = useState("")
     const [validationErrors, setValidationErrors] = useState({})
 
-    // useEffect(() => {
-    //     const errors = {};
-    //     if (!rat)
-    // })
-
     const handleOptionChange = async (e) => {
         setRecommendation(e.target.value)
     }
@@ -41,7 +32,7 @@ function ReviewForm() {
 
     const handleReview = async (e) => {
         e.preventDefault();
-        const newReview = {
+        const updateReview = {
             rating: Number(stars),
             review_content: review,
             title,
@@ -49,22 +40,15 @@ function ReviewForm() {
             value: Number(valueStars),
             quality: Number(qualityStars),
             purchased,
-            recommendation,
             display_name: displayName
         };
 
-        // recommendation === 'True' ? newReview.recommendation = true : newReview.recommendation = false
-        purchased === 'True' ? newReview.purchased = true : newReview.purchased = false
+        recommendation === 'True' ? updateReview.recommendation = true : updateReview.recommendation = false
+        purchased === 'True' ? updateReview.purchased = true : updateReview.purchased = false
 
-        await dispatch(createReviewThunk(newReview, productId))
+        await dispatch(updateReviewThunk(updateReview, reviewId))
         return history.push(`/products/${productId}`)
     }
-
-    // useEffect(() => {
-    //     dispatch(allProductsThunk())
-    // }, [dispatch])
-
-    if(!user) history.push('/login')
 
     return (
         <div className="review container">
@@ -74,7 +58,7 @@ function ReviewForm() {
                         <h2>Insert the Image here</h2>
                     </div>
                     <div className="form-info">
-                        <h2>Review This Item</h2>
+                        <h2>Edit Review On This Item</h2>
                         <h2>Product Name</h2>
                         <textarea
                             className="review-text"
@@ -136,7 +120,7 @@ function ReviewForm() {
                         </div>
 
                         <div className="review-content-section">
-                            <h3>Write your review</h3>
+                            <h3>Edit your review</h3>
                             <input
                             className="review-title"
                             placeholder="Review Title"
@@ -286,13 +270,12 @@ function ReviewForm() {
                     </div>
                 </div>
                 <button type="submit" className="submit-review-button" onClick={handleReview}>
-                    Submit Your Review
+                    Submit Your New Review
                 </button>
 
             </form>
         </div>
     )
-};
+}
 
-
-export default ReviewForm;
+export default EditReviewForm;

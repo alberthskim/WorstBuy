@@ -1,6 +1,6 @@
 const ALL_PRODUCTS = 'products/ALL_PRODUCTS';
 const SINGLE_PRODUCT = 'products/SINGLE_PRODUCT'
-// const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
 
 const getAllProducts = (products) => ({
     type: ALL_PRODUCTS,
@@ -12,6 +12,10 @@ const getSingleProduct = (product) => ({
     product
 })
 
+const deleteReview = (reviewId) => ({
+    type: DELETE_REVIEW,
+    reviewId
+})
 
 export const allProductsThunk = () => async (dispatch) => {
     const response = await fetch('/api/products')
@@ -36,7 +40,17 @@ export const singleProductThunk = (productId) => async (dispatch) => {
 
 
 // REVIEWS ROUTE
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    const response = await fetch (`/api/products/reviews/${reviewId}`, {
+        method: "DELETE"
+    });
 
+    if (response.ok) {
+        const deletedResponse = await response.json()
+        await dispatch(deleteReview(reviewId))
+        return deletedResponse;
+    }
+}
 
 
 
@@ -51,6 +65,10 @@ const productsReducer = (state = initialState, action) => {
             return newState
         case SINGLE_PRODUCT:
             newState = {...state, singleProduct: {...action.product}}
+            return newState
+        case DELETE_REVIEW:
+            newState = {...state, singleProduct: {...state.singleProduct}}
+            delete newState.singleProduct[action.reviewId]
             return newState
         default:
             return state;

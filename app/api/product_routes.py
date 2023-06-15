@@ -75,7 +75,7 @@ def single_product(productId):
 
 ## REVIEW QUERIES/CRUDS BELOW
 
-# CREATE A REVIEW - NEED TO TEST
+# CREATE A REVIEW - WORKS
 @product_routes.route('/<int:productId>/reviews', methods = ['POST'])
 @login_required
 def create_review(productId):
@@ -110,8 +110,8 @@ def create_review(productId):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# Update A Review - NEED TO TEST
-@product_routes.route('/<int:productId>/reviews/<int:reviewId>', methods = ['PUT'])
+# Update A Review - WORKS
+@product_routes.route('/reviews/<int:reviewId>', methods = ['PUT'])
 @login_required
 def update_review(reviewId):
     """
@@ -137,7 +137,7 @@ def update_review(reviewId):
 
 
 # Delete a review - NEED TO TEST
-@product_routes.route('/<int:productId>/reviews/<int:reviewId>', methods = ['DELETE'])
+@product_routes.route('/reviews/<int:reviewId>', methods = ['DELETE'])
 @login_required
 def delete_review(reviewId):
     review = Review.query.get(reviewId)

@@ -39,7 +39,7 @@ function LandingPage() {
 
     return (
         <div className="landing-page">
-            <div className="page-content">
+            <div className="landingpage-content">
                 <div className="left-side">
                     <h2>Welcome To Worst Buy</h2>
                     <p>Browse for the worst things you can possibly purchase ever!</p>
