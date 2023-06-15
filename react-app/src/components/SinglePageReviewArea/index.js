@@ -105,7 +105,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
             <div className="review-images-area">
               {reviews.map((image) => (
                 <div className="product-review-image">
-                  <img src={image.reviewUrl} />
+                  <img className="review-img-url" src={image.reviewUrl} />
                 </div>
               ))}
               <button onClick={handleClick}>Write a Review</button>

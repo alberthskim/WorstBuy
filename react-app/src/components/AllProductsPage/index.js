@@ -13,7 +13,7 @@ function AllProductPage() {
     }, [dispatch])
 
     return (
-        <div className="main-area">
+        <div className="main-area-product">
             <div className="page-content">
                 {products.map((product) => (
                     <Link to={`/products/${product.id}`} className="product-details">
