@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { allProductsThunk } from "../../store/product";
 import './reviewform.css'
+import { createReviewThunk } from "../../store/review";
 
 function ReviewForm() {
     const dispatch = useDispatch()
@@ -14,9 +15,9 @@ function ReviewForm() {
     const [rating, setRating] = useState(1)
     const [stars, setStars] = useState("")
     const [qualityRating, setQualityRating] = useState(1)
-    const [qualityStars, setQualityStars] = useState("")
+    const [qualityStars, setQualityStars] = useState(null)
     const [valueRating, setValueRating] = useState(1)
-    const [valueStars, setValueStars] = useState("")
+    const [valueStars, setValueStars] = useState(null)
     const [review, setReview] = useState("")
     const [title, setTitle] = useState("")
     const [reviewImageUrl, setReviewImageUrl] = useState("")
@@ -41,25 +42,26 @@ function ReviewForm() {
     const handleReview = async (e) => {
         e.preventDefault();
         const newReview = {
-            rating,
-            stars: Number(stars),
-            qualityStars: Number(qualityStars),
-            valueStars: Number(valueStars),
-            review,
+            rating: Number(stars),
+            review_content: review,
             title,
-            reviewImageUrl,
+            review_url: reviewImageUrl,
+            value: Number(valueStars),
+            quality: Number(qualityStars),
             purchased,
-            recommendation,
-            displayName
+            display_name: displayName
         };
 
-        console.log("THIS IS THE REVIEW GETTING SENT", newReview)
-        return "New Review Submitted!!"
+        recommendation === 'True' ? newReview.recommendation = true : newReview.recommendation = false
+        purchased === 'True' ? newReview.purchased = true : newReview.purchased = false
+
+        await dispatch(createReviewThunk(newReview, productId))
+        return history.push(`/products/${productId}`)
     }
 
-    useEffect(() => {
-        dispatch(allProductsThunk())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(allProductsThunk())
+    // }, [dispatch])
 
     if(!user) history.push('/login')
 

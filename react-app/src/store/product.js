@@ -1,14 +1,15 @@
 const ALL_PRODUCTS = 'products/ALL_PRODUCTS';
 const SINGLE_PRODUCT = 'products/SINGLE_PRODUCT'
+// const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 
 const getAllProducts = (products) => ({
     type: ALL_PRODUCTS,
     products
 })
 
-const getSingleProduct = (productId) => ({
+const getSingleProduct = (product) => ({
     type: SINGLE_PRODUCT,
-    productId
+    product
 })
 
 
@@ -33,12 +34,23 @@ export const singleProductThunk = (productId) => async (dispatch) => {
     }
 }
 
-const initialState = {}
+
+// REVIEWS ROUTE
+
+
+
+
+
+
+const initialState = {allProducts: {}, singleProduct: {}}
 const productsReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case ALL_PRODUCTS:
-            newState = {...action.products}
+            newState = {allProducts: {...action.products}}
+            return newState
+        case SINGLE_PRODUCT:
+            newState = {...state, singleProduct: {...action.product}}
             return newState
         default:
             return state;

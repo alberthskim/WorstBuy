@@ -6,13 +6,11 @@ import './allproductspage.css'
 
 function AllProductPage() {
     const dispatch = useDispatch()
+    const products = Object.values(useSelector(state => state.products.allProducts))
 
     useEffect(() => {
         dispatch(allProductsThunk())
     }, [dispatch])
-
-
-    const products = Object.values(useSelector(state => state.products))
 
     return (
         <div className="main-area">

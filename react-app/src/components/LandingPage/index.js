@@ -34,7 +34,7 @@ function LandingPage() {
         history.push('/products')
     }
 
-    const products = Object.values(useSelector(state => state.products))
+    const products = Object.values(useSelector(state => state.products.allProducts))
     const fourRandomProducts = getRandomProducts(products)
 
     return (
