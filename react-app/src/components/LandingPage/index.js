@@ -7,6 +7,7 @@ import './landingpage.css'
 function LandingPage() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const products = Object.values(useSelector(state => state.products.allProducts))
 
     useEffect(() => {
         dispatch(allProductsThunk())
@@ -34,7 +35,6 @@ function LandingPage() {
         history.push('/products')
     }
 
-    const products = Object.values(useSelector(state => state.products.allProducts))
     const fourRandomProducts = getRandomProducts(products)
 
     return (
@@ -52,7 +52,7 @@ function LandingPage() {
                     {fourRandomProducts.map((product) => (
                         <Link to ={`/products/${product.id}`} className="random-link">
                             <div className="picture-area">
-                                <img className="pics" src={product.imageUrl}></img>
+                                <img className="pics" src={product.imageUrl} alt="random"></img>
                                 <span>{product.name}</span>
                             </div>
                         </Link>

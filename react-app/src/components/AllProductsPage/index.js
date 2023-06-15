@@ -18,7 +18,7 @@ function AllProductPage() {
                 {products.map((product) => (
                     <Link to={`/products/${product.id}`} className="product-details">
                         <div className="products">
-                            <img className="product-images"src={product.imageUrl} />
+                            <img className="product-images"src={product.imageUrl} alt="products" />
                             <h2>{product.name}</h2>
                             <p>⭐️ {product.reviews.length}</p>
                             <p>${product.price}</p>

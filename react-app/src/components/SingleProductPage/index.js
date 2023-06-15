@@ -32,7 +32,7 @@ function SingleProductPage() {
                     <img src={product.imageUrl}></img>
                     {product.productImages.map((product) => (
                         <div className="products">
-                            <img src={product.imageUrl} />
+                            <img src={product.imageUrl} alt="product"/>
                         </div>
                     ))}
                 </div>
