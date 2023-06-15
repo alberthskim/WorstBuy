@@ -92,7 +92,7 @@ def upgrade():
     sa.Column('value', sa.Integer(), nullable=True),
     sa.Column('quality', sa.Integer(), nullable=True),
     sa.Column('purchased', sa.Boolean(), nullable=True),
-    sa.Column('recommendation', sa.Boolean(), nullable=True),
+    sa.Column('recommendation', sa.String(), nullable=True),
     sa.Column('display_name', sa.String(length=50), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
