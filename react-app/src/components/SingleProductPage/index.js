@@ -62,7 +62,7 @@ function SingleProductPage() {
 
             </div>
             <div className="review-area">
-                <SinglePageReviewArea product={product} productId={productId} reviews={reviews}/>
+                <SinglePageReviewArea product={product} productId={productId} allReviews={reviews}/>
             </div>
 
 

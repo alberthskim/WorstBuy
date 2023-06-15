@@ -19,6 +19,8 @@ const updateReview = (review) => ({
     review
 })
 
+//MOVED TO PRODUCTS REDUCER SINCE I AM UPDATING THE REVIEW IN THE SINGLE PRODUCT
+//AND NOT THE REVIEW STATE
 // const deleteReview = (reviewId) => ({
 //     type: DELETE_REVIEW,
 //     reviewId

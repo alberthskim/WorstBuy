@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateReviewThunk } from "../../store/review";
+import { singleProductThunk } from "../../store/product";
 
 function EditReviewForm() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { productId, reviewId } = useParams()
+    const product = useSelector(state => state.products.singleProduct)
+
 
     const [rating, setRating] = useState(1)
     const [stars, setStars] = useState("")
@@ -21,6 +24,14 @@ function EditReviewForm() {
     const [recommendation, setRecommendation] = useState("")
     const [displayName, setDisplayName] = useState("")
     const [validationErrors, setValidationErrors] = useState({})
+
+    useEffect(() => {
+        dispatch(singleProductThunk(productId))
+    }, [dispatch])
+
+
+    if(!Object.values(product).length) return null
+
 
     const handleOptionChange = async (e) => {
         setRecommendation(e.target.value)
@@ -49,6 +60,7 @@ function EditReviewForm() {
         await dispatch(updateReviewThunk(updateReview, reviewId))
         return history.push(`/products/${productId}`)
     }
+
 
     return (
         <div className="review container">

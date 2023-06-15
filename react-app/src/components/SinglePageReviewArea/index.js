@@ -6,7 +6,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { deleteReviewThunk } from "../../store/product";
 import { singleProductThunk } from "../../store/product";
 
-function SinglePageReviewArea({ product, productId, reviews}) {
+function SinglePageReviewArea({ product, productId, allReviews}) {
+  const reviews = Object.values(allReviews)
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const dispatch = useDispatch()

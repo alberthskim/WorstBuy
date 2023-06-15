@@ -68,7 +68,7 @@ const productsReducer = (state = initialState, action) => {
             return newState
         case DELETE_REVIEW:
             newState = {...state, singleProduct: {...state.singleProduct}}
-            delete newState.singleProduct[action.reviewId]
+            delete newState.singleProduct.reviews[action.reviewId]
             return newState
         default:
             return state;

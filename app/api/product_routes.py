@@ -58,7 +58,10 @@ def single_product(productId):
     product_dict = product.to_dict()
 
     product_review = product.reviews
-    product_review_dict = [review.to_dict() for review in product_review]
+    product_review_dict = {}
+    for review in product_review:
+        review_id = review.id
+        product_review_dict[review_id] = review.to_dict()
 
 
     #Grab the product images related to the product
