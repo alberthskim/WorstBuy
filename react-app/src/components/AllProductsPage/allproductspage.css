@@ -2,3 +2,18 @@
     height: 250px;
     width: 250px;
 }
+
+.product-details {
+    text-decoration: none;
+    gap: 1rem;
+}
+
+.products {
+    border: 1px solid gray;
+}
+
+.page-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+

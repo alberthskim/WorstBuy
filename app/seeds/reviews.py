@@ -22,7 +22,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -32,11 +32,11 @@ def seed_reviews():
         product_id = 2,
         rating = 3,
         review_content = "Comfortable but kinda silly to wear in public. Great PJs",
-        title = 'It"s Okay...',
+        title = "It's Okay...",
         value = 4,
         quality = 5,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -50,7 +50,7 @@ def seed_reviews():
         value = 3,
         quality = 2,
         purchased = True,
-        recommendation = False,
+        recommendation = "False",
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -64,7 +64,7 @@ def seed_reviews():
         value = 5,
         quality = 4,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -78,7 +78,7 @@ def seed_reviews():
         value = 4,
         quality = 3,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -88,7 +88,7 @@ def seed_reviews():
         product_id = 6,
         rating = 4,
         review_content = "I don't have kids but this looks kinda cool.",
-        title = 'Tes Box Diapers',
+        title = 'Tezzy Box Diapers',
         purchased = False,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
@@ -104,7 +104,7 @@ def seed_reviews():
         value = 2,
         quality = 3,
         purchased = True,
-        recommendation = False,
+        recommendation = "False",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -118,7 +118,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -128,11 +128,11 @@ def seed_reviews():
         product_id = 3,
         rating = 1,
         review_content = "I thought it was a kitchen knife...",
-        title = 'Don"t Purchase!!!',
+        title = "Don't Purchase!!!",
         value = 1,
         quality = 1,
         purchased = True,
-        recommendation = False,
+        recommendation = "False",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -146,7 +146,7 @@ def seed_reviews():
         value = 4,
         quality = 4,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -158,7 +158,7 @@ def seed_reviews():
         review_content = "Haven't purchased yet but looking to add it to my saved items",
         title = 'I WANT PLEASEEE',
         purchased = False,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -172,7 +172,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -186,7 +186,7 @@ def seed_reviews():
         value = 4,
         quality = 4,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'BobbieSMURDA',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -200,7 +200,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = True,
+        recommendation = "True",
         display_name = 'BobbieSMURDA',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )

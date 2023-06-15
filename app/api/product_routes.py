@@ -47,35 +47,38 @@ def all_products():
     return normalized_obj
 
 
-# @product_routes.route('/<int:productId>')
-# def single_product(productId):
-#     """
-#     Query for a single product with its images and reviews
-#     """
+@product_routes.route('/<int:productId>')
+def single_product(productId):
+    """
+    Query for a single product with its images and reviews
+    """
 
-#     #Grab the single product by its id
-#     product = Product.query.get(productId)
-#     product_dict = product.to_dict()
+    #Grab the single product by its id
+    product = Product.query.get(productId)
+    product_dict = product.to_dict()
 
-#     product_review = product.reviews
-#     product_review_dict = [review.to_dict() for review in product_review]
+    product_review = product.reviews
+    product_review_dict = {}
+    for review in product_review:
+        review_id = review.id
+        product_review_dict[review_id] = review.to_dict()
 
 
-#     #Grab the product images related to the product
-#     product_images = product.product_images
-#     product_images_dict = [image.to_dict() for image in product_images]
+    #Grab the product images related to the product
+    product_images = product.product_images
+    product_images_dict = [image.to_dict() for image in product_images]
 
-#     product_dict['productImages'] = product_images_dict
-#     product_dict['reviews'] = product_review_dict
+    product_dict['productImages'] = product_images_dict
+    product_dict['reviews'] = product_review_dict
 
-#     return product_dict
+    return product_dict
 
 
 
 
 ## REVIEW QUERIES/CRUDS BELOW
 
-# CREATE A REVIEW - NEED TO TEST
+# CREATE A REVIEW - WORKS
 @product_routes.route('/<int:productId>/reviews', methods = ['POST'])
 @login_required
 def create_review(productId):
@@ -89,6 +92,7 @@ def create_review(productId):
         review = Review(
             product_id = productId,
             user_id = current_user.id,
+            rating = form.data['rating'],
             review_content = form.data['review_content'],
             title = form.data['title'],
             review_url = form.data['review_url'],
@@ -109,8 +113,8 @@ def create_review(productId):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# Update A Review - NEED TO TEST
-@product_routes.route('/<int:productId>/reviews/<int:reviewId>', methods = ['PUT'])
+# Update A Review - WORKS
+@product_routes.route('/reviews/<int:reviewId>', methods = ['PUT'])
 @login_required
 def update_review(reviewId):
     """
@@ -136,7 +140,7 @@ def update_review(reviewId):
 
 
 # Delete a review - NEED TO TEST
-@product_routes.route('/<int:productId>/reviews/<int:reviewId>', methods = ['DELETE'])
+@product_routes.route('/reviews/<int:reviewId>', methods = ['DELETE'])
 @login_required
 def delete_review(reviewId):
     review = Review.query.get(reviewId)
