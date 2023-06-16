@@ -19,9 +19,16 @@ function Navigation({ isLoaded }){
 					{/* <input className="search-bar"></input> */}
 				</li>
 				{isLoaded && (
-					<li>
-						<ProfileButton user={sessionUser} />
-					</li>
+					<div className="right-corner">
+						<li>
+							<ProfileButton user={sessionUser} />
+						</li>
+						<li>
+							<NavLink exact to="/cart" className="logo">
+								<i className="fas fa-shopping-cart"></i>
+							</NavLink>
+						</li>
+					</div>
 				)}
 			</ul>
 		</div>

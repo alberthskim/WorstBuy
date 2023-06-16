@@ -10,6 +10,7 @@ import SingleProductPage from "./components/SingleProductPage";
 import AllProductPage from "./components/AllProductsPage";
 import ReviewForm from "./components/ReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
+import CartPage from "./components/CartPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route exact path="/cart">
+            <CartPage />
           </Route>
           <Route exact path="/products/:productId/reviews/:reviewId/edit">
             <EditReviewForm />

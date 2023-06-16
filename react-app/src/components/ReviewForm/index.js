@@ -78,12 +78,15 @@ function ReviewForm() {
     if(!user) history.push('/login')
 
     return (
-        <div className="review container">
+        <div className="review-container">
+
             <form onSubmit={handleReview}>
                 <div className="review-area">
+
                     <div className="review-product-image">
                         <img className="review-img" src={product.imageUrl} alt="review-pic"/>
                     </div>
+
                     <div className="form-info">
                         <h2>Review This Item</h2>
                         <h2>{product.name}</h2>
@@ -171,19 +174,19 @@ function ReviewForm() {
                             {validationErrors.title && submitted && (
                             <p className="errors">{validationErrors.title}</p>
                             )}
-                            <p>summarize your thoughts in a short headline</p>
+                            <p className="under-review">Summarize your thoughts in a short headline</p>
                             <textarea
-                            className="review-text"
+                            className="review-text-info"
                             placeholder="Provide a brief description"
                             value={review}
                             onChange={(e) => setReview(e.target.value)}
                             />
-                            <p>Minimum length is 20 characters.</p>
+                            <p className="under-review">Please write atleast 20 characters.</p>
                             {validationErrors.review && submitted && (
                             <p className="errors">{validationErrors.review}</p>
                             )}
 
-                            <h2>Tell us more (optional)</h2>
+                            <h3>Tell us more (optional)</h3>
                             <div className="quality-value">
                                 <p>Quality</p>
                                 <div className="stars-for-rating">
@@ -277,26 +280,26 @@ function ReviewForm() {
 
 
                         <div className="recommendation-area">
-                            <h3>Would you recommend this item? (optional)</h3>
                             <div className="choose-option">
+                                <h3>Would you recommend this item? (optional)</h3>
                                 <h4>Select Option To Apply</h4>
                                 <label>
-                                    Yes
                                     <input
                                         type="radio"
                                         value="True"
                                         checked={recommendation === 'True'}
                                         onChange={handleOptionChange}
                                     />
+                                    Yes
                                 </label>
                                 <label>
-                                    No
                                     <input
                                         type="radio"
                                         value="False"
                                         checked={recommendation === 'False'}
                                         onChange={handleOptionChange}
                                     />
+                                    No
                                 </label>
                             </div>
                         </div>
@@ -306,35 +309,39 @@ function ReviewForm() {
                             <div className="choose-option">
                                 <h4>Select Option To Apply</h4>
                                 <label>
-                                    Yes
                                     <input
                                         type="radio"
                                         value="True"
                                         checked={purchased === 'True'}
                                         onChange={handlePurchaseChange}
                                     />
+                                    Yes
                                 </label>
                                 <label>
-                                    No
                                     <input
                                         type="radio"
                                         value="False"
                                         checked={purchased === 'False'}
                                         onChange={handlePurchaseChange}
                                     />
+                                    No
                                 </label>
                             </div>
                             {validationErrors.purchased && submitted && (
                             <p className="errors">{validationErrors.purchased}</p>
                             )}
                         </div>
+                        <button type="submit" className="submit-review-button" onClick={handleReview}>
+                            Submit Review
+                        </button>
                     </div>
                 </div>
-                <button type="submit" className="submit-review-button" onClick={handleReview}>
-                    Submit Your Review
-                </button>
+
+
 
             </form>
+
+
         </div>
     )
 };

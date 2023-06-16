@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
@@ -10,6 +10,11 @@ function SingleProductPage() {
     const { productId } = useParams();
     const product = useSelector(state => state.products.singleProduct)
     const reviews = product?.reviews
+    const [quantity, setQuantity] = useState(1)
+
+    const quantityChange = (e) => {
+        setQuantity(e.target.value);
+    }
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
@@ -48,7 +53,18 @@ function SingleProductPage() {
                             <span>⭐️ {product.reviews.length}</span>
                         </div>
                         <div className="quantity-cart">
-                            <button>quantity</button>
+                            <select value={quantity} onChange={quantityChange}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
                             <button>Add to Cart</button>
                         </div>
                     </div>
