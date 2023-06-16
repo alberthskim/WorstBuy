@@ -1,6 +1,22 @@
+import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
+import { allCartItemsThunk } from '../../store/cart'
+import React, { useEffect } from 'react'
 
 function CartPage() {
+    const dispatch = useDispatch()
+    const cartItems = useSelector(state => state.cart.cartItems)
+
+    const user = useSelector(state => state.session.user)
+
+    useEffect(() => {
+        dispatch(allCartItemsThunk(user.id))
+    }, [dispatch])
+
+    // if(!Object.values(cartItems).length) {
+    //     return <h1>Loading...</h1>
+    // }
+
     return (
         <div className="cart-page">
 
