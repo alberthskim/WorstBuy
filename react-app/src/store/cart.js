@@ -10,16 +10,14 @@ const getAllCartItems = (cartItems) => ({
 })
 
 
-const addCartItem = (productId, quantity) => ({
+const addCartItem = (cartItem) => ({
     type: ADD_ITEM_TO_CART,
-    productId,
-    quantity
+    cartItem
 })
 
-const updateCartItem = (cartId, quantity) => ({
+const updateCartItem = (updatedItem) => ({
     type: UPDATE_CART_ITEM,
-    cartId,
-    quantity
+    updatedItem
 })
 
 const deleteCartItem = (userId, productId) => ({
@@ -35,21 +33,24 @@ export const allCartItemsThunk = (userId) => async (dispatch) => {
     if (response.ok) {
         const userCart = await response.json()
         await dispatch(getAllCartItems(userCart))
-        return userProducts
+        return userCart
     }
 }
 
 export const addCartItemThunk = (productId, quantity) => async (dispatch) => {
+    console.log("INSIDE THUNKY", productId)
+    console.log("INSIDE FFAFAEFE", quantity)
+
     const response = await fetch(`/api/cart/items`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(productId, quantity)
+        body: JSON.stringify({productId, quantity})
     })
 
     if (response.ok) {
-        const addedProduct = await response.json()
-        await dispatch(addCartItem(productId, quantity))
-        return addedProduct
+        const addedItem = await response.json()
+        await dispatch(addCartItem(addedItem))
+        return addedItem
     }
 }
 
@@ -62,7 +63,7 @@ export const updateCartItemThunk = (userId, productId, quantity) => async (dispa
 
     if (response.ok) {
         const updatedProduct = await response.json()
-        await dispatch(updateCartItem(cartId))
+        await dispatch(updateCartItem(updatedProduct))
         return updatedProduct
     }
 }
@@ -88,9 +89,13 @@ const cartItemReducer = (state = initialState, action) => {
             newState = {...state}
             action.cartItems.forEach(cartItem => newState.cartItems[cartItem.id] = cartItem)
             return newState
+        case ADD_ITEM_TO_CART:
+            newState = {...state}
+            newState.cartItems[action.cartItem.id] = action.cartItem
+            return newState
         case UPDATE_CART_ITEM:
             newState = {...state}
-            newState.cartItems[action.cartId.quantity] = action.quantity
+            newState.cartItems[action.cartId].quantity = action.quantity
             return newState
         default: {
             return state

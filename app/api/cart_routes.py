@@ -1,9 +1,57 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, json
 from flask_login import login_required, current_user
 from app.models import db, CartItem
 
 cart_routes = Blueprint('cart', __name__)
 
+
+
+## CREATE A CART
+@cart_routes.route('/items', methods=['POST'])
+def create_cart():
+    """
+    Create a cart
+    """
+
+    # This grabs the request from the front end thunk with the productId and quantity
+    data = request.get_json()
+
+    # This queries the database to find the current users cart and see if they have a product that matches what they wanted to add
+    cartItem = CartItem.query.filter(CartItem.user_id == current_user.id, CartItem.product_id == data['productId']).first()
+
+    #If that cartItem exists, we increment its quantity
+    if cartItem:
+        cartItem.quantity += data['quantity']
+    #else we create a new cartItem set with the information below
+    else:
+        cartItem = CartItem(
+            quantity=data['quantity'],
+            user_id=current_user.id,
+            product_id=data['productId']
+        )
+
+        db.session.add(cartItem)
+
+    db.session.commit()
+
+    return cartItem.to_dict()
+    # data = json.loads(request.data)
+    # print("THIS IS THE MEGA DATA-----", data)
+    # cartItem = CartItem.query.filter_by(CartItem.user_id == current_user.id, CartItem.product_id == data['productId'])
+    # print("YOOEAKFOEAFEAOFKEAOFKOEA------", cartItem[0])
+    # if cartItem[0]:
+    #     cartItem[0].quantity += data['quantity']
+    # else:
+    #     cart = CartItem(
+    #         quantity = data['quantity'],
+    #         user_id = current_user.id,
+    #         product_id = data['productId']
+    #     )
+
+    #     db.session.add(cart)
+    # db.session.commit()
+
+    # return cart.to_dict()
 
 
 ## Get all Users Cart
@@ -13,31 +61,8 @@ def user_cart(userId):
     cartItem_list = [cartItem.to_dict() for cartItem in cartItems]
     return cartItem_list
 
-
-
-## CREATE A CART
-@cart_routes.route('/items', methods=['POST'])
-def create_cart(productId, quantity):
-    """
-    Create a cart
-    """
-
-    cart = CartItem(
-        quantity = quantity,
-        user_id = current_user.id,
-        product_id = productId
-    )
-
-    db.session.add(cart)
-    db.session.commit()
-
-    return cart.to_dict()
-
-
-
 ## UPDATE A CART
 @cart_routes.route('/item/edit', methods=['PUT'])
-@login_required
 def update_cart(userId, productId, quantity):
     """
     Update a cart
@@ -58,7 +83,7 @@ def update_cart(userId, productId, quantity):
 ## DELETE A CART
 @cart_routes.route('/item/delete', methods=['DELETE'])
 @login_required
-def update_cart(userId, productId):
+def delete_cart(userId, productId):
     """
     Delete a cart
     """
