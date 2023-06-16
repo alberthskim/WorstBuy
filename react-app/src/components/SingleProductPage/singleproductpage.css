@@ -1,1 +1,38 @@
+.whole-page {
+    border: 5px solid red;
+}
 
+.product-info {
+    border: 5px solid blue;
+    display: flex;
+}
+
+.default-preview-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.left-side-left {
+    border: 5px solid purple;
+    width: 10%;
+}
+
+.middle-area {
+    border: 5px solid green;
+    width: 60%;
+}
+
+.left-side-right {
+    border: 3px solid black;
+}
+
+.more-pics {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.main-pic {
+    display: flex;
+}

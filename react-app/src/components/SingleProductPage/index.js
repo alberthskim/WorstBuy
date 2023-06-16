@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { singleProductThunk} from "../../store/product";
-// import './singleproductpage.css'
+import './singleproductpage.css'
 import { useParams} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
 
@@ -10,6 +10,11 @@ function SingleProductPage() {
     const { productId } = useParams();
     const product = useSelector(state => state.products.singleProduct)
     const reviews = product?.reviews
+    const [quantity, setQuantity] = useState(1)
+
+    const quantityChange = (e) => {
+        setQuantity(e.target.value);
+    }
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
@@ -25,34 +30,53 @@ function SingleProductPage() {
 
 
 
+            <h2>{product.name}</h2>
             <div className="product-info">
 
-                <div className="left-side">
-                    <h2>{product.name}</h2>
-                    <img src={product.imageUrl}></img>
-                    {product.productImages.map((product) => (
-                        <div className="products">
-                            <img src={product.imageUrl} />
-                        </div>
-                    ))}
-                </div>
+                    <div className="left-side-left">
+                        {product.productImages.map((product) => (
+                            <div className="products-pic">
+                                <img className="more-pics" src={product.imageUrl} alt="product"/>
+                            </div>
+                        ))}
+                    </div>
 
-                <div className="top-right">
-                    <span>${product.price}</span>
-                    <div className="ratings">
-                        <span>⭐️ {product.reviews.length}</span>
+                    <div className="middle-area">
+                        <div className="main-pic">
+                            <img className="default-preview-image" src={product.imageUrl}></img>
+                        </div>
                     </div>
-                    <div className="quantity-cart">
-                        <button>quantity</button>
-                        <button>Add to Cart</button>
+
+                    <div className="left-side-right">
+                        <span>${product.price}</span>
+                        <div className="ratings">
+                            <span>⭐️ {product.reviews.length}</span>
+                        </div>
+                        <div className="quantity-cart">
+                            <select value={quantity} onChange={quantityChange}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <button>Add to Cart</button>
+                        </div>
                     </div>
-                </div>
+
 
             </div>
 
+
+
             <div className="description-area">
 
-                <div className="bottom">
+                <div className="bottom-description-area">
                    <h1>About this item</h1>
                    <h3>Description</h3>
                    <div className="description">

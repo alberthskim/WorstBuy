@@ -15,3 +15,66 @@
     display: flex;
     flex-direction: column;
 }
+
+.errors {
+    color: red;
+}
+
+.review-img {
+    width: 100%;
+    height: 50%;
+}
+
+.review-container {
+    border: 5px solid red;
+}
+
+.review-area {
+    border: 5px solid green;
+    display: flex;
+}
+
+.review-product-image {
+    border: 5px solid blue;
+    width: 30%;
+}
+
+.form-info {
+    border: 5px solid purple;
+    width: 70%;
+    padding-left: 2rem;
+}
+
+.review-text {
+    width: 60%;
+    resize: none;
+    height: 1.5rem;
+    /* text-align: center; */
+}
+
+.image-upload {
+    width: 30%;
+    padding: .4rem .5rem;
+}
+
+.under-review {
+    font-size: 11px;
+    margin-bottom: 1rem;
+}
+
+.review-title {
+    width: 40%;
+    padding: .5rem 1rem;
+}
+
+.review-text-info {
+    width: 44%;
+    outline: none;
+    height: 8rem;
+    resize: none;
+}
+
+.submit-review-button {
+    margin-top: 1rem;
+    padding: .5rem 1rem;
+}

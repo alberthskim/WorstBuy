@@ -5,15 +5,30 @@
 
 .product-details {
     text-decoration: none;
-    gap: 1rem;
+    /* gap: 1rem; */
+    border: 5px solid orange;
 }
 
 .products {
     border: 1px solid gray;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 5px solid purple
 }
 
 .page-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 1rem;
+    border: 5px solid green;
+    gap: 1rem;
 }
 
+.main-area-product {
+    border: 5px solid red;
+    padding: 1rem;
+}
