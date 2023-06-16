@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { singleProductThunk} from "../../store/product";
 import './singlepagereviewarea.css'
@@ -11,6 +11,11 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const dispatch = useDispatch()
+
+
+  // const userReview = reviews.find(review => review.userId === user.id)
+  // console.log("THIS IS THE userREVIEW", userReview)
+
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -108,7 +113,9 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   <img className="review-img-url" src={image.reviewUrl} />
                 </div>
               ))}
-              <button onClick={handleClick}>Write a Review</button>
+              {user && !reviews.find(review => review.userId === user.id) && (
+                <button onClick={handleClick}>Write a Review</button>
+              )}
             </div>
           </div>
         </div>
@@ -133,7 +140,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <div className="name-posted">
                   <p>
                     {review.displayName} - {review.createdAt},{" "}
-                    {review.purchased ? <p>✅ Verified Purchased</p> : null}
+                    {review.purchased ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
                 <div className="review-content">{review.reviewContent}</div>
