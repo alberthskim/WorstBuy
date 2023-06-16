@@ -15,3 +15,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.errors {
+    color: red;
+}
+
+.review-img {
+    width: 20%;
+}
+
