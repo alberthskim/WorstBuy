@@ -81,21 +81,21 @@ export const deleteCartItemThunk = (userId, productId) => async (dispatch) => {
 }
 
 
-const initialState = {cartItems: {}}
+const initialState = {}
 const cartItemReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case GET_CART_ITEMS:
             newState = {...state}
-            action.cartItems.forEach(cartItem => newState.cartItems[cartItem.id] = cartItem)
+            action.cartItems.forEach(cartItem => newState[cartItem.id] = cartItem)
             return newState
         case ADD_ITEM_TO_CART:
             newState = {...state}
-            newState.cartItems[action.cartItem.id] = action.cartItem
+            newState[action.cartItem.id] = action.cartItem
             return newState
         case UPDATE_CART_ITEM:
             newState = {...state}
-            newState.cartItems[action.cartId].quantity = action.quantity
+            newState[action.cartId].quantity = action.quantity
             return newState
         default: {
             return state
