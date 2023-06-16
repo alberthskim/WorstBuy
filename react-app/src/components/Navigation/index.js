@@ -21,12 +21,12 @@ function Navigation({ isLoaded }){
 				{isLoaded && (
 					<div className="right-corner">
 						<li>
+							<ProfileButton user={sessionUser} />
+						</li>
+						<li>
 							<NavLink exact to="/cart" className="logo">
 								<i className="fas fa-shopping-cart"></i>
 							</NavLink>
-						</li>
-						<li>
-							<ProfileButton user={sessionUser} />
 						</li>
 					</div>
 				)}
