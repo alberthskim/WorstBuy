@@ -92,6 +92,9 @@ const cartItemReducer = (state = initialState, action) => {
             newState = {...state}
             newState.cartItems[action.cartId.quantity] = action.quantity
             return newState
+        default: {
+            return state
+        }
     }
 }
 

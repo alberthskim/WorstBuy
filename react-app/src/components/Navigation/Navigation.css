@@ -23,6 +23,16 @@ li {
   list-style: none;
 }
 
+.right-corner > li {
+  color: white;
+}
+
+.right-corner {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
 .nav-bar-area {
   background-color: #0046be;
 }
