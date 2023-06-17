@@ -80,3 +80,7 @@
     color: black;
     border-radius: 8px;
 }
+
+.checkout:hover {
+    cursor: pointer;
+}

@@ -38,8 +38,6 @@ export const allCartItemsThunk = (userId) => async (dispatch) => {
 }
 
 export const addCartItemThunk = (productId, quantity) => async (dispatch) => {
-    console.log("INSIDE THUNKY", productId)
-    console.log("INSIDE FFAFAEFE", quantity)
 
     const response = await fetch(`/api/cart/items`, {
         method: "POST",
@@ -58,7 +56,7 @@ export const updateCartItemThunk = (userId, productId, quantity) => async (dispa
     const response = await fetch(`/api/cart/item/edit`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(userId, productId, quantity)
+        body: JSON.stringify({userId, productId, quantity})
     })
 
     if (response.ok) {
@@ -95,7 +93,7 @@ const cartItemReducer = (state = initialState, action) => {
             return newState
         case UPDATE_CART_ITEM:
             newState = {...state}
-            newState[action.cartId].quantity = action.quantity
+            newState[action.updatedItem.id] = {...action.updatedItem}
             return newState
         default: {
             return state

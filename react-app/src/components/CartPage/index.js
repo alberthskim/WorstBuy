@@ -1,33 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
-import { allCartItemsThunk } from '../../store/cart'
+import { allCartItemsThunk, updateCartItemThunk } from '../../store/cart'
 import React, { useEffect, useState } from 'react'
 
 function CartPage() {
     const dispatch = useDispatch()
     const cartItems = Object.values(useSelector(state => state.cart))
+    console.log("THIS IS THE CARTITEM", cartItems)
     const user = useSelector(state => state.session.user)
-    const [quantity, setQuantity] = useState(1)
+    // const [quantity, setQuantity] = useState(1)
+    const [productId, setProductId] = useState(1)
 
-    
-
-
+    // useEffect(() => {
+    //     dispatch(updateCartItemThunk(user.id, productId, quantity))
+    // }, [productId, quantity])
 
     useEffect(() => {
         dispatch(allCartItemsThunk(user.id))
     }, [dispatch])
 
-    const quantityChange = (e) => {
-        setQuantity(e.target.value);
+    const quantityChange = (productId, quantity) => {
+        console.log("THIS IS THE PRODUCTID", productId)
+        console.log("THIS IS THE QUANTITY", quantity)
+        dispatch(updateCartItemThunk(user.id, productId, parseInt(quantity)))
     }
 
+
     const totalAmount = (cartItems) => {
-        console.log("THIS IS THE cartItems", cartItems)
         let total = 0
         for (let i = 0; i < cartItems.length; i++) {
             total += cartItems[i].quantity * cartItems[i].productPrice
         }
-        console.log("THIS IS THE TOTAL", total)
         return total
     }
 
@@ -38,9 +41,6 @@ function CartPage() {
 
     // if(!cartItems.length) return <h1>LOADING...</h1>
 
-    // {cartItems.map((item) => (
-    //     total = (item.productPrice * item.quantity).toFixed(2)
-    // ))}
 
     return (
         <div className="cart-page">
@@ -52,12 +52,13 @@ function CartPage() {
                     <div className="cart-items-stuff">
                         {cartItems.map((item) => (
                             <>
+                                {console.log("THE MAPPY MAP",item)}
                                 <div className="individual-item">
                                     <img className="cart-item-image" src={item.productImage} alt="item-img"/>
                                     <p>{item.productName}</p>
                                     <div className="quantity-price">
-                                        <div className="quantity-select">
-                                            <select value={quantity} onChange={quantityChange}>
+                                    <div className="quantity-select">
+                                            <select value={item.quantity} onChange={(e) => quantityChange(item.productId, e.target.value)}>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -120,7 +121,7 @@ function CartPage() {
                     </div>
 
                     <div className="button-area">
-                        <button className="checkout">Checkout</button>
+                        <button className="checkout" onClick={() => alert("Taking you to checkout Page")}>Checkout</button>
                     </div>
                 </div>
 
