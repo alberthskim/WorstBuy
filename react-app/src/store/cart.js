@@ -20,10 +20,9 @@ const updateCartItem = (updatedItem) => ({
     updatedItem
 })
 
-const deleteCartItem = (userId, productId) => ({
+const deleteCartItem = (cartId) => ({
     type: DELETE_CART_ITEM,
-    userId,
-    productId
+    cartId
 })
 
 
@@ -66,14 +65,17 @@ export const updateCartItemThunk = (userId, productId, quantity) => async (dispa
     }
 }
 
-export const deleteCartItemThunk = (userId, productId) => async (dispatch) => {
+export const deleteCartItemThunk = (cartId, userId, productId) => async (dispatch) => {
     const response = await fetch(`/api/cart/item/delete`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({userId, productId})
     })
 
     if (response.ok) {
         const deletedProduct = await response.json()
-        await dispatch(deleteCartItem(userId, productId))
+        console.log("THIS IS THE STUFF GETTING SENT TO ACTION", deletedProduct )
+        await dispatch(deleteCartItem(cartId))
         return deletedProduct
     }
 }
@@ -94,6 +96,10 @@ const cartItemReducer = (state = initialState, action) => {
         case UPDATE_CART_ITEM:
             newState = {...state}
             newState[action.updatedItem.id] = {...action.updatedItem}
+            return newState
+        case DELETE_CART_ITEM:
+            newState = {...state}
+            delete newState[action.cartId]
             return newState
         default: {
             return state

@@ -84,3 +84,11 @@
 .checkout:hover {
     cursor: pointer;
 }
+
+.remove-item {
+    color: #0046be
+}
+.remove-item:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

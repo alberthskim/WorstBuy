@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
-import { allCartItemsThunk, updateCartItemThunk } from '../../store/cart'
+import { allCartItemsThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
 import React, { useEffect, useState } from 'react'
 
 function CartPage() {
@@ -70,6 +70,8 @@ function CartPage() {
                                                 <option value="9">9</option>
                                                 <option value="10">10</option>
                                             </select>
+
+                                            <p className="remove-item" onClick={() => dispatch(deleteCartItemThunk(item.id, user.id, item.productId))}>remove</p>
                                         </div>
                                         <p>${item.productPrice}</p>
                                     </div>

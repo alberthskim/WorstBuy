@@ -84,12 +84,14 @@ def update_cart():
 ## DELETE A CART
 @cart_routes.route('/item/delete', methods=['DELETE'])
 @login_required
-def delete_cart(userId, productId):
+def delete_cart():
     """
     Delete a cart
     """
+    data = request.get_json()
+    cartItem = CartItem.query.filter(CartItem.user_id == data['userId'], CartItem.product_id == data['productId']).first()
 
-    cartItem = CartItem.query.filter(CartItem.user_id == userId and CartItem.product_id == productId)
     db.session.delete(cartItem)
+    db.session.commit()
 
-    return jsonify({"message": "Successfully Deleted Cart Item!"})
+    return jsonify({"message": "Item has been sucessfully deleted!"})
