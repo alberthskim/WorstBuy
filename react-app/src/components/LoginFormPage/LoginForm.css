@@ -52,7 +52,7 @@
     border: 1px solid lightgray;
 }
 
-.sign-up-page-whole {
+.sign-in-page-whole {
     background-color: #f0f2f4;
     height: 100vh;
 }
@@ -70,7 +70,7 @@
     font-size: 12px;
 }
 
-.sign-up-page {
+.sign-in-page {
     text-decoration: none;
     font-size: 12px;
     color: #0046be
