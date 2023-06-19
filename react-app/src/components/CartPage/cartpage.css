@@ -13,6 +13,26 @@
     height: 50%;
 }
 
+.cart-item-image {
+    height: 150px;
+    width: 150px;
+}
+
+.cart-items-stuff {
+   border: 5px solid pink
+}
+
+.individual-item {
+    border: 5px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quantity-price {
+    display: flex;
+    justify-content: center;
+}
+
 .cart-bottom-area {
     height: 50%;
 }
@@ -59,4 +79,16 @@
     background-color: yellow;
     color: black;
     border-radius: 8px;
+}
+
+.checkout:hover {
+    cursor: pointer;
+}
+
+.remove-item {
+    color: #0046be
+}
+.remove-item:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
