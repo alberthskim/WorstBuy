@@ -4,6 +4,7 @@ import { singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
 import { useParams} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
+import { addCartItemThunk } from "../../store/cart";
 
 function SingleProductPage() {
     const dispatch = useDispatch()
@@ -14,6 +15,10 @@ function SingleProductPage() {
 
     const quantityChange = (e) => {
         setQuantity(e.target.value);
+    }
+
+    const addToCart = (productId, quantity) => {
+        dispatch(addCartItemThunk(productId, parseInt(quantity)))
     }
 
     useEffect(() => {
@@ -53,7 +58,7 @@ function SingleProductPage() {
                             <span>⭐️ {product.reviews.length}</span>
                         </div>
                         <div className="quantity-cart">
-                            <select value={quantity} onChange={quantityChange}>
+                            <select value={product.quantity} onChange={quantityChange}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -65,7 +70,10 @@ function SingleProductPage() {
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                            <button>Add to Cart</button>
+                            <button onClick={(e) => {
+                                alert("Added To Cart")
+                                addToCart(product.id, quantity);
+                                }}>Add to Cart</button>
                         </div>
                     </div>
 
