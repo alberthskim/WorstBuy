@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, json
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, CartItem
 
@@ -63,32 +63,35 @@ def user_cart(userId):
 
 ## UPDATE A CART
 @cart_routes.route('/item/edit', methods=['PUT'])
-def update_cart(userId, productId, quantity):
+def update_cart():
     """
     Update a cart
     """
+    data = request.get_json()
+
+
     #This queries for the CartItem that matches the current user thats logged in and the product that matches what was requested.
-    cartItem = CartItem.query.filter(CartItem.user_id == userId and CartItem.product_id == productId)
-    # ex: [{id: 1, user_id: 2, product_id: 1, quantity: 1}]
-    cart = cartItem[0]
-    # ex: {id: 1, user_id: 2, product_id: 1, quantity: 1}
-    cart.quantity = quantity
+    cartItem = CartItem.query.filter(CartItem.user_id == data['userId'], CartItem.product_id == data['productId']).first()
+
+    cartItem.quantity = data['quantity']
     # ex: {id: 1, user_id: 2, product_id: 1, quantity: 5}
 
     db.session.commit()
 
-    return {'cartId':cart.id, 'quantity': cart.quantity}
+    return cartItem.to_dict()
 
 
 ## DELETE A CART
 @cart_routes.route('/item/delete', methods=['DELETE'])
 @login_required
-def delete_cart(userId, productId):
+def delete_cart():
     """
     Delete a cart
     """
+    data = request.get_json()
+    cartItem = CartItem.query.filter(CartItem.user_id == data['userId'], CartItem.product_id == data['productId']).first()
 
-    cartItem = CartItem.query.filter(CartItem.user_id == userId and CartItem.product_id == productId)
     db.session.delete(cartItem)
+    db.session.commit()
 
-    return jsonify({"message": "Successfully Deleted Cart Item!"})
+    return jsonify({"message": "Item has been sucessfully deleted!"})

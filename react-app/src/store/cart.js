@@ -20,10 +20,9 @@ const updateCartItem = (updatedItem) => ({
     updatedItem
 })
 
-const deleteCartItem = (userId, productId) => ({
+const deleteCartItem = (cartId) => ({
     type: DELETE_CART_ITEM,
-    userId,
-    productId
+    cartId
 })
 
 
@@ -38,8 +37,6 @@ export const allCartItemsThunk = (userId) => async (dispatch) => {
 }
 
 export const addCartItemThunk = (productId, quantity) => async (dispatch) => {
-    console.log("INSIDE THUNKY", productId)
-    console.log("INSIDE FFAFAEFE", quantity)
 
     const response = await fetch(`/api/cart/items`, {
         method: "POST",
@@ -58,7 +55,7 @@ export const updateCartItemThunk = (userId, productId, quantity) => async (dispa
     const response = await fetch(`/api/cart/item/edit`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(userId, productId, quantity)
+        body: JSON.stringify({userId, productId, quantity})
     })
 
     if (response.ok) {
@@ -68,34 +65,41 @@ export const updateCartItemThunk = (userId, productId, quantity) => async (dispa
     }
 }
 
-export const deleteCartItemThunk = (userId, productId) => async (dispatch) => {
+export const deleteCartItemThunk = (cartId, userId, productId) => async (dispatch) => {
     const response = await fetch(`/api/cart/item/delete`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({userId, productId})
     })
 
     if (response.ok) {
         const deletedProduct = await response.json()
-        await dispatch(deleteCartItem(userId, productId))
+        console.log("THIS IS THE STUFF GETTING SENT TO ACTION", deletedProduct )
+        await dispatch(deleteCartItem(cartId))
         return deletedProduct
     }
 }
 
 
-const initialState = {cartItems: {}}
+const initialState = {}
 const cartItemReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case GET_CART_ITEMS:
             newState = {...state}
-            action.cartItems.forEach(cartItem => newState.cartItems[cartItem.id] = cartItem)
+            action.cartItems.forEach(cartItem => newState[cartItem.id] = cartItem)
             return newState
         case ADD_ITEM_TO_CART:
             newState = {...state}
-            newState.cartItems[action.cartItem.id] = action.cartItem
+            newState[action.cartItem.id] = action.cartItem
             return newState
         case UPDATE_CART_ITEM:
             newState = {...state}
-            newState.cartItems[action.cartId].quantity = action.quantity
+            newState[action.updatedItem.id] = {...action.updatedItem}
+            return newState
+        case DELETE_CART_ITEM:
+            newState = {...state}
+            delete newState[action.cartId]
             return newState
         default: {
             return state

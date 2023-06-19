@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import logo from '../../assets/worst-buy.png'
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -11,8 +12,8 @@ function Navigation({ isLoaded }){
 		<div className="nav-bar-area">
 			<ul className="nav-list">
 				<li>
-					<NavLink exact to="/" className="logo">
-						<h1 className="nav-title">WorstBuy</h1>
+					<NavLink exact to="/" id="logo">
+						<img src={logo} className="logo" alt="logo" />
 					</NavLink>
 				</li>
 				<li>
