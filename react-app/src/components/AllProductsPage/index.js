@@ -18,17 +18,26 @@ function AllProductPage() {
         <div className="main-area-product">
             <div className="page-content">
                 {products.map((product) => (
-                    <>
+                    <div className="product-detail-container">
                         <Link to={`/products/${product.id}`} className="product-details">
                             <div className="products">
-                                <img className="product-images"src={product.imageUrl} alt="products" />
-                                <h2>{product.name}</h2>
-                                <p>⭐️ {product.reviews.length}</p>
-                                <p>${product.price}</p>
+                                <div className="pics">
+                                    <img className="product-images"src={product.imageUrl} alt="products" />
+                                </div>
+                                <div className="product-deets">
+                                    <h3>{product.name}</h3>
+                                    <p>⭐️ {product.reviews.length}</p>
+                                </div>
+                                <div className="product-price">
+                                    <p>${product.price}</p>
+                                </div>
                             </div>
                         </Link>
-                        <button onClick={() => dispatch(addCartItemThunk(product.id, 1))}>Add To Cart</button>
-                    </>
+                        <button className="add-cart" onClick={() => {
+                            dispatch(addCartItemThunk(product.id, 1));
+                            alert("Added To Cart")
+                            }}>Add To Cart</button>
+                    </div>
                 ))}
             </div>
         </div>

@@ -62,7 +62,7 @@ function LandingPage() {
                         {fourRandomProducts.map((product) => (
                             <div className="mapped-individual-products">
                                 <Link to ={`/products/${product.id}`} className="random-link">
-                                    <img className="pics" src={product.imageUrl} alt="random"></img>
+                                    <img className="landing-pics" src={product.imageUrl} alt="random"></img>
                                     <span className="product-name">{product.name}</span>
                                 </Link>
                             </div>
@@ -76,7 +76,21 @@ function LandingPage() {
                     </div>
 
                     <div className="bottom-right-side">
-                        <h2>Insert Something Here</h2>
+                        <h2>Meet The Developer</h2>
+                        <div className="developer">
+                            <img className="albert" src='https://cdn.discordapp.com/attachments/1114341543340408832/1114341568766300221/Screenshot_2023-06-02_at_4.54.20_PM.png' alt="myself" />
+                        </div>
+                        <div className="developer-info">
+                            <div className="contributor-name">Name: Albert Kim</div>
+                            <div className="social-container">
+                                <a href="https://github.com/alberthskim">
+                                <img className="social" src="https://i.imgur.com/40XDjRy.png" alt="social" />
+                                </a>
+                                <a href="https://www.linkedin.com/in/albertkim01/">
+                                <img className="social" src="https://i.imgur.com/LdJxIp7.png" alt="social" />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

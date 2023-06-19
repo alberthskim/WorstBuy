@@ -1,0 +1,107 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 2rem;
+    width: 28%;
+    height: 58%;
+    margin: 0 auto;
+    position: relative;
+    top: 2rem;
+}
+
+.form-area {
+    width: 80%;
+    height: 80%;
+}
+
+.form-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-box {
+    width: 100%;
+}
+
+.email-box, .password-box {
+    width: 93.7%;
+}
+
+.sign-in-button {
+    width: 100%;
+    background-color: #0046be;
+    color: white;
+    font-size: bold;
+    border: #0046be;
+}
+
+.sign-in-button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px gray;
+}
+
+.email-box, .password-box, .sign-in-button{
+    padding: .75rem .5rem;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.sign-up-page-whole {
+    background-color: #f0f2f4;
+    height: 100vh;
+}
+
+.button-area {
+    width: 100%;
+}
+
+.terms-create-acc {
+    margin-top: 2rem;
+    border-top: 1px solid lightgray
+}
+
+.disclosure {
+    font-size: 12px;
+}
+
+.sign-up-page {
+    text-decoration: none;
+    font-size: 12px;
+    color: #0046be
+}
+
+.sign-in-header {
+    margin-bottom: 2rem;
+}
+
+
+.sign-in-errors {
+    color: red;
+    padding: 0;
+    font-size: 12px;
+}
+
+.demo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.demo-name {
+    padding: .5rem 1rem;
+    background-color: rgb(49, 153, 49);
+    color: white;
+    border-radius: 4px;
+    border: 1px solid rgb(49, 153, 49);
+}
+
+.demo-name:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px gray;
+}

@@ -46,6 +46,9 @@ li {
 .logo {
   text-decoration: none;
   color: white;
+  height: 70px;
+  width: 170px;
+  padding: 1rem;
 }
 
 /* .search-bar {

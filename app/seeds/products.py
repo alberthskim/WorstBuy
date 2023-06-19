@@ -75,7 +75,7 @@ def seed_products():
 
     product8 = Product(
         user_id = 1,
-        name = 'The Middle-Aged Mutant Ninja Turtles - By Evan Keatman and Larry Paird',
+        name = 'The Middle-Aged Mutant Ninja Turtles',
         model = 'S42322',
         category = "Books",
         price = 19.99,
