@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
-import { useParams} from "react-router-dom";
+import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
 import { addCartItemThunk } from "../../store/cart";
 
 function SingleProductPage() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { productId } = useParams();
     const product = useSelector(state => state.products.singleProduct)
+    const user = useSelector(state => state.session.user)
     const reviews = product?.reviews
     const [quantity, setQuantity] = useState(1)
 
@@ -24,6 +26,32 @@ function SingleProductPage() {
     useEffect(() => {
         dispatch(singleProductThunk(productId))
     }, [dispatch])
+
+    const starRating = (rating) => {
+        let stars = []
+        for(let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<i class="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+            } else {
+                stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
+            }
+        }
+        return stars;
+      }
+
+
+      const getAverageRating = (reviews) => {
+        let number = 0;
+        let total = reviews.length
+        for (let i = 0; i < reviews.length; i++) {
+          if(reviews[i].rating) {
+            number += reviews[i].rating;
+          } else {
+            total--
+          }
+        }
+        return starRating((number / total).toFixed(1));
+      };
 
 
     if (!product || !Object.values(product).length) {
@@ -53,7 +81,7 @@ function SingleProductPage() {
                     <div className="left-side-right">
                         <span>${product.price}</span>
                         <div className="ratings">
-                            <span>⭐️ {product.reviews.length}</span>
+                            <span>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
                         </div>
                         <div className="quantity-cart">
                             <select value={product.quantity} onChange={quantityChange}>
@@ -68,10 +96,17 @@ function SingleProductPage() {
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                            <button onClick={(e) => {
-                                alert("Added To Cart")
+                            {!user ? (
+                            <button className="add-cart" onClick={() => {
+                                alert("Must Be Logged In First!")
+                                history.push('/login')
+                                }}>Add To Cart</button>
+                        ) : (
+                            <button className="add-cart" onClick={() => {
                                 addToCart(product.id, quantity);
-                                }}>Add to Cart</button>
+                                alert("Added To Cart")
+                                }}>Add To Cart</button>
+                        )}
                         </div>
                     </div>
 
