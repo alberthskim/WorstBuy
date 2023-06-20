@@ -31,11 +31,11 @@ function ReviewForm() {
     useEffect(() => {
         const errors = {};
         if (!rating) errors.rating = "Must Submit A Rating"
-        if (!review || review.length < 20 || review.length > 500) errors.review = "Minimum length must be 20 characters and less than 500 characters."
-        if (!title || title.length < 1 || title.length > 50) errors.title = "Title must be 1 character and less than 100 characters."
+        if (!review || review.trim().length < 20 || review.trim().length > 500) errors.review = "Minimum length must be 20 characters and less than 500 characters."
+        if (!title || title.trim().length < 1 || title.trim().length > 50) errors.title = "Title must be 1 character and less than 100 characters."
         if (reviewImageUrl && (!reviewImageUrl.includes('.png') && !reviewImageUrl.includes('.jpg') && !reviewImageUrl.includes('.jpeg'))) errors.reviewImageUrl = "Review Image URL must end in .png, .jpg, .jpeg"
         if (!purchased) errors.purchased = "Must Choose an option"
-        if (!displayName || displayName.length < 4 || displayName > 20) errors.displayName = "Name must be 4 characters and less than 20 characters."
+        if (!displayName || displayName.trim().length < 4 || displayName.trim().length > 20) errors.displayName = "Name must be 4 characters and less than 20 characters."
 
         setValidationErrors(errors);
     }, [rating, review, title, reviewImageUrl, purchased, displayName])
