@@ -5,15 +5,12 @@
 
 .random-link {
     text-decoration: none;
-    /* margin-left: 1rem; */
-    /* border: 3px solid green; */
 }
 
 .whole-landing-page {
     display: flex;
-    height: 90vh;
+    height: 95vh;
     margin: 1.5rem;
-    /* border: 10px solid black; */
     gap: 1rem;
 }
 
@@ -23,7 +20,6 @@
     align-items: center;
     justify-content: center;
     width: 40%;
-    /* border: 5px solid red; */
     border: 1px solid lightgray;
     gap: 1rem;
 }
@@ -41,16 +37,10 @@
     width: 60%;
     height: 100%;
     gap: .5rem;
-    /* border: 5px solid purple; */
-    /* border: 1px solid gray; */
 }
 
 .top-container {
-    /* height: 40%; */
     padding-bottom: 1rem;
-    /* margin-bottom: 1rem; */
-    /* border: 5px solid blue; */
-    /* margin: 0; */
     padding: 0 1.5rem;
     padding-bottom: 1rem;
     border: 1px solid lightgray;
@@ -58,11 +48,8 @@
 
 
 .whole-mapped-list {
-    /* width: 100%; */
     display: flex;
     gap: 1rem;
-    /* border: 5px solid green; */
-    /* border: 1px solid gray; */
 }
 
 .random-link {
@@ -77,8 +64,6 @@
     width: 100%;
     height: 100%;
     gap: 1rem;
-    /* border: 5px solid orange */
-    /* border: 1px solid gray; */
 }
 
 .bottom-container {
@@ -86,12 +71,10 @@
     width: 100%;
     height: 60%;
     gap: 1rem;
-    /* border: 5px solid red; */
 }
 
 .bottom-left-side {
     width: 50%;
-    /* border: 5px solid blue */
     border: 1px solid lightgray;
 }
 
@@ -123,7 +106,6 @@
 }
 
 .developer {
-    /* border: 3px solid blue; */
     display: flex;
     height: 50%;
     width: 50%;
@@ -134,8 +116,8 @@
 .albert {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     border-radius: 5px;
-    /* border: 3px solid green; */
 }
 
 .social {
@@ -147,4 +129,36 @@
     padding-top: 1rem;
     display: flex;
     gap: 1rem;
+}
+
+.bottom-left-side {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+.qrcode {
+    height: 50%;
+    width: 50%;
+}
+
+.worst-phone {
+    height: 100%;
+    object-fit: cover;
+    width: 50%;
+}
+
+.qrcode-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shop-stuff {
+    margin-bottom: 0;
+    padding-bottom: .2rem;
+}
+
+.scan-code {
+    padding-top: .5rem;
+    margin: 0;
 }

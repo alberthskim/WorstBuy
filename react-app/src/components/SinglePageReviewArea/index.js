@@ -167,7 +167,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     {review.purchased ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
-                <div className="review-content">{review.reviewContent}</div>
+                <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
 
                 {user && user.id === review.userId && (
                   <div className="edit-delete">

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { allProductsThunk } from "../../store/product";
-import { useHistory, Link } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom";
+import QrCode from '../../assets/qr-code.png';
+import worstphone from '../../assets/worstbuy-phone.png';
 import './landingpage.css'
 
 function LandingPage() {
@@ -72,7 +74,12 @@ function LandingPage() {
 
                 <div className="bottom-container">
                     <div className="bottom-left-side">
-                        <h2>Insert Something Here</h2>
+                        <h2 className="shop-stuff">Shop smarter, faster</h2>
+                        <div className="qrcode-area">
+                            <img src={worstphone} className="worst-phone"/>
+                            <img src={QrCode} className="qrcode"/>
+                        </div>
+                        <p className="scan-code">Scan the QR code to check out the site on your phone!</p>
                     </div>
 
                     <div className="bottom-right-side">
