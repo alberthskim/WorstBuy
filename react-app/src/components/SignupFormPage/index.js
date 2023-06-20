@@ -17,6 +17,9 @@ function SignupFormPage() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
+  const emailValidation = (email) => {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  };
 
   useEffect(() => {
     const errors = {};
@@ -34,9 +37,6 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const emailValidation = (email) => {
-    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
