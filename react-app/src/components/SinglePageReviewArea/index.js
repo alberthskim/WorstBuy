@@ -23,7 +23,33 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     return;
   };
 
+  const starRating = (rating) => {
+    let stars = []
+    for(let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars.push(<i class="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+        } else {
+            stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
+        }
+    }
+    return stars
+  }
+
+
   const getAverageRating = (reviews) => {
+    let number = 0;
+    let total = reviews.length
+    for (let i = 0; i < reviews.length; i++) {
+      if(reviews[i].rating) {
+        number += reviews[i].rating;
+      } else {
+        total--
+      }
+    }
+    return starRating((number / total).toFixed(1));
+  };
+
+  const getAverageRatingNumber = (reviews) => {
     let number = 0;
     let total = reviews.length
     for (let i = 0; i < reviews.length; i++) {
@@ -36,10 +62,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     return (number / total).toFixed(1);
   };
 
-  let averageRating = getAverageRating(reviews);
-
   const getRecommendationAverage = (reviews) => {
-    console.log("THIS IS REVIEW", reviews)
     let count = 0;
     let total = reviews.length
     for (let i = 0; i < reviews.length; i++) {
@@ -67,13 +90,15 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
             <div className="review-stars-ratings">
               <div className="reviews-info">
                 <p>
-                  {averageRating > 0 ? (
-                    averageRating
+                  {reviews.length ? (
+                    <>
+                      <p>{getAverageRatingNumber(reviews)}</p>
+                      <p>{getAverageRating(reviews)}</p>
+                    </>
                   ) : (
                     <p>No Ratings For This Review</p>
                   )}
                 </p>
-                <p>⭐️⭐️⭐️⭐️⭐️</p>
                 <p>
                   {reviews.length ? (
                     <>{reviews.length} star ratings</>
@@ -121,14 +146,13 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
         </div>
 
         <div className="Reviews-made">
-          <p>We found {product.reviews.length} matching reviews</p>
 
           <div className="individual-reviews">
             {reviews.toReversed().map((review) => (
               <div className="products-reviews">
                 <h3>{review.title}</h3>
                 <div className="rating-recommend">
-                  <p>⭐️⭐️⭐️⭐️⭐️</p>
+                  <p>{starRating(review.rating)}</p>
                   <p>
                     {review.recommendation ? review.recommendation ? (
                       <p>👍🏻 Would Recommend</p>
@@ -143,7 +167,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     {review.purchased ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
-                <div className="review-content">{review.reviewContent}</div>
+                <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
 
                 {user && user.id === review.userId && (
                   <div className="edit-delete">

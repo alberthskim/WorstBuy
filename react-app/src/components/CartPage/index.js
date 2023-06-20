@@ -1,27 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
 import { allCartItemsThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
+import {useHistory, Redirect} from 'react-router-dom'
 
 function CartPage() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const cartItems = Object.values(useSelector(state => state.cart))
-    console.log("THIS IS THE CARTITEM", cartItems)
     const user = useSelector(state => state.session.user)
-    // const [quantity, setQuantity] = useState(1)
-    const [productId, setProductId] = useState(1)
 
-    // useEffect(() => {
-    //     dispatch(updateCartItemThunk(user.id, productId, quantity))
-    // }, [productId, quantity])
 
     useEffect(() => {
+        if (!user) return history.push('/login')
         dispatch(allCartItemsThunk(user.id))
     }, [dispatch])
 
     const quantityChange = (productId, quantity) => {
-        console.log("THIS IS THE PRODUCTID", productId)
-        console.log("THIS IS THE QUANTITY", quantity)
         dispatch(updateCartItemThunk(user.id, productId, parseInt(quantity)))
     }
 
@@ -104,9 +99,9 @@ function CartPage() {
                         </div>
 
                         <div className="price">
-                            <p>{totalItemPrice}</p>
+                            <p>$ {totalItemPrice}</p>
                             <p>FREE</p>
-                            <p>{estimatedTax}</p>
+                            <p>$ {estimatedTax}</p>
                         </div>
 
                     </div>
@@ -117,7 +112,7 @@ function CartPage() {
                             <p>Total</p>
                         </div>
                         <div className="total-amount">
-                            <p>{totalPriceAmount}</p>
+                            <p>$ {totalPriceAmount}</p>
                         </div>
 
                     </div>

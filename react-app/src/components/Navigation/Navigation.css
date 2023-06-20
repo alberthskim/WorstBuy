@@ -5,13 +5,13 @@
   min-width: 10em;
   width: auto;
   height: auto;
-  right: 1em;
+  right: 7em;
   margin-top: 10px;
   padding: 0.5em;
   background-color: white;
   box-shadow: 0px 0px 10px lightgrey;
   border-radius: 15px;
-  top: 55px;
+  /* top: px; */
   list-style: none;
 }
 
@@ -21,6 +21,10 @@
 
 li {
   list-style: none;
+}
+
+.profile-li {
+  display: flex;
 }
 
 .right-corner {
