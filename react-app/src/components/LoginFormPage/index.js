@@ -14,7 +14,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  // if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/" />;
   // if (sessionUser) history.goBack();
 
   const handleSubmit = async (e) => {
@@ -42,7 +42,7 @@ function LoginFormPage() {
   };
 
   return (
-    <div className="sign-up-page-whole">
+    <div className="sign-in-page-whole">
       <div className="form-container">
         <h2 className="sign-in-header">Sign In To Worst Buy</h2>
         <div className="form-area">
@@ -50,7 +50,7 @@ function LoginFormPage() {
             <div className="form-detail">
               <label className="input-box">
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email Address"
                   className="email-box"
                   value={email}
@@ -84,7 +84,7 @@ function LoginFormPage() {
               <p className="disclosure">By continuing you agree to our Terms and Conditions, our Privacy Policy, and the My Worst Buy Program Terms.</p>
             </div>
             <div className="create-acc">
-              <h4>Don't have an account? <Link className="sign-up-page" to='/signup'>Create an account</Link></h4>
+              <h4>Don't have an account? <Link className="sign-in-page" to='/signup'>Create an account</Link></h4>
             </div>
             <div onClick={demoUser} className="demo-card">
                 <button className="demo-name">Demo User</button>

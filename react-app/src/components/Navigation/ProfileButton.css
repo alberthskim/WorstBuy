@@ -1,0 +1,13 @@
+.login-button-nav, .sign-up-button-nav {
+    padding: .5rem;
+}
+
+.login-button-nav {
+    background-color: #0046be;
+    color: white;
+}
+
+.sign-up-button-nav {
+    background-color: white;
+    color: #0046be;
+}
