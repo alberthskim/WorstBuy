@@ -33,8 +33,6 @@ function SingleProductPage() {
     return (
         <div className="whole-page">
 
-
-
             <h2>{product.name}</h2>
             <div className="product-info">
 
