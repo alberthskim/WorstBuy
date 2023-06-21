@@ -51,15 +51,16 @@ function EditReviewForm() {
 
     useEffect(() => {
         const errors = {};
-        if (!rating) errors.rating = "Must Submit A Rating"
+        if (!rating || rating < 0) errors.rating = "Must Submit A Rating"
         if (!review || review.trim().length < 20 || review.trim().length > 500) errors.review = "Minimum length must be 20 characters and less than 500 characters."
         if (!title || title.trim().length < 1 || title.trim().length > 50) errors.title = "Title must be 1 character and less than 100 characters."
         if (reviewImageUrl && (!reviewImageUrl.includes('.png') && !reviewImageUrl.includes('.jpg') && !reviewImageUrl.includes('.jpeg'))) errors.reviewImageUrl = "Review Image URL must end in .png, .jpg, .jpeg"
         if (!purchased) errors.purchased = "Must Choose an option"
+        if (!recommendation) errors.recommendation = "Must Choose an option"
         if (!displayName || displayName.trim().length < 4 || displayName.trim().length > 20) errors.displayName = "Name must be 4 characters and less than 20 characters."
 
         setValidationErrors(errors);
-    }, [rating, review, title, reviewImageUrl, purchased, displayName])
+    }, [rating, review, title, reviewImageUrl, purchased, recommendation, displayName])
 
     if(!Object.values(product).length) return null
 
@@ -300,7 +301,7 @@ function EditReviewForm() {
 
                         <div className="recommendation-area">
                             <div className="choose-option">
-                                <h3>Would you recommend this item? (optional)</h3>
+                                <h3>Would you recommend this item?</h3>
                                 <h4>Select Option To Apply</h4>
                                 <label>
                                     <input
@@ -321,6 +322,9 @@ function EditReviewForm() {
                                     No
                                 </label>
                             </div>
+                            {validationErrors.recommendation && submitted && (
+                            <p className="errors">{validationErrors.recommendation}</p>
+                            )}
                         </div>
 
                         <div className="purchased-area">

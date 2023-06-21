@@ -16,8 +16,8 @@ class Review(db.Model):
     review_url = db.Column(db.String(255), nullable = True)
     value = db.Column(db.Integer, nullable = True)
     quality = db.Column(db.Integer, nullable = True)
-    purchased = db.Column(db.Boolean)
-    recommendation = db.Column(db.String)
+    purchased = db.Column(db.String, nullable = False)
+    recommendation = db.Column(db.String, nullable = False)
     display_name = db.Column(db.String(50), nullable = False)
     created_at = db.Column(db.DateTime, default = datetime.utcnow())
 

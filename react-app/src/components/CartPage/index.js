@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
-import { allCartItemsThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
+import { allCartItemsThunk, deleteAllCartThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
 import React, { useEffect} from 'react'
-import {useHistory, Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 function CartPage() {
     const dispatch = useDispatch()
@@ -75,9 +75,9 @@ function CartPage() {
                         ))}
                     </div>
                 </div>
-                <div className="cart-bottom-area">
+                {/* <div className="cart-bottom-area">
                     <p>Saved Items</p>
-                </div>
+                </div> */}
 
 
             </div>
@@ -118,7 +118,10 @@ function CartPage() {
                     </div>
 
                     <div className="button-area">
-                        <button className="checkout" onClick={() => alert("Taking you to checkout Page")}>Checkout</button>
+                         <button className="checkout" onClick={() => {
+                             dispatch(deleteAllCartThunk());
+                             alert("Your purchase has been made! Please check your email for the order confirmation number. Thank you for shopping with Worst Buy.")
+                            }}>Checkout</button>
                     </div>
                 </div>
 
