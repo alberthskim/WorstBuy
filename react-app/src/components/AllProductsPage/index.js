@@ -55,7 +55,7 @@ function AllProductPage() {
                                     <p>{getAverageRating(product.reviews)} ({product.reviews.length})</p>
                                 </div>
                                 <div className="product-price">
-                                    <p>${(product.price).toFixed(2)}</p>
+                                    <p>${product.price}</p>
                                 </div>
                             </div>
                         </Link>
