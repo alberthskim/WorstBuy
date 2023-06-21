@@ -87,10 +87,9 @@ function EditReviewForm() {
                 value: Number(valueStars),
                 quality: Number(qualityStars),
                 purchased,
+                recommendation,
                 display_name: displayName
             };
-            recommendation === 'True' ? updateReview.recommendation = true : updateReview.recommendation = false
-            purchased === 'True' ? updateReview.purchased = true : updateReview.purchased = false
             await dispatch(updateReviewThunk(updateReview, reviewId))
             return history.push(`/products/${productId}`)
         }

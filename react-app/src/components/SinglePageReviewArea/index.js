@@ -66,7 +66,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     let count = 0;
     let total = reviews.length
     for (let i = 0; i < reviews.length; i++) {
-        if(reviews[i].recommendation > 0) {
+        if(reviews[i].recommendation === "True") {
           count++
         }
     }
@@ -145,7 +145,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   <p className="star-rate">{starRating(review.rating)}</p>
                   <p>
                     {console.log("THIS IS THE REVIEW", review.recommendation)}
-                    {+review.recommendation ? (
+                    {review.recommendation === "True" ? (
                       <p>👍🏻 Would Recommend</p>
                     ) : (
                       <p>👎🏻 Would Not Recommend</p>
@@ -157,7 +157,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     {review.displayName} - {review.createdAt},
                   </p>
                   <p>
-                    {+review.purchased ? <p>✅ Verified Purchaser</p> : null}
+                    {review.purchased === "True" ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
                 <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
