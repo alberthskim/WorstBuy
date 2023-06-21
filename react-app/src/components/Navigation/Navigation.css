@@ -60,3 +60,23 @@ li {
   padding: .5rem 5rem;
   margin-right: 8rem;
 } */
+
+
+.cart-logo {
+  position: relative;
+}
+
+.cart-logo__amount {
+  position: absolute;
+  right: -50%;
+  background-color: yellow;
+  padding: 0 5px;
+  font-size: 12px;
+  color: black;
+  border-radius: 10px;
+  bottom: 12px;
+}
+
+.cart-logo__amount:hover {
+  cursor: pointer;
+}

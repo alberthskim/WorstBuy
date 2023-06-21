@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateReviewThunk } from "../../store/review";
 import { singleProductThunk } from "../../store/product";
+import { allCartItemsThunk } from "../../store/cart";
 
 function EditReviewForm() {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ function EditReviewForm() {
     const { productId, reviewId } = useParams()
     const product = useSelector(state => state.products.singleProduct)
     const reviews = useSelector(state => state.products.singleProduct.reviews)
+    const user = useSelector(state => state.session.user)
     // const currentReview = reviews[reviewId]
 
 
@@ -28,18 +30,6 @@ function EditReviewForm() {
     const [validationErrors, setValidationErrors] = useState({})
     const [submitted, setSubmitted] = useState(false)
 
-    // useEffect(() => {
-    //     dispatch(singleProductThunk(productId))
-    //     .then(data => {
-    //         setReview(Object.values(data.reviews)[0].reviewContent)
-    //         setTitle(Object.values(data.reviews)[0].title)
-    //         setDisplayName(Object.values(data.reviews)[0].displayName)
-    //         setRating(Object.values(data.reviews)[0].rating)
-    //         setQualityRating(Object.values(data.reviews)[0].quality)
-    //         setValueRating(Object.values(data.reviews)[0].value)
-    //     })
-    // }, [])
-
     useEffect(() => {
         dispatch(singleProductThunk(productId))
         .then(data => {
@@ -47,6 +37,9 @@ function EditReviewForm() {
             setTitle(data.reviews[reviewId].title)
             setReview(data.reviews[reviewId].reviewContent)
         })
+        if(user) {
+            dispatch(allCartItemsThunk(user.id))
+        }
     }, [dispatch])
 
     useEffect(() => {

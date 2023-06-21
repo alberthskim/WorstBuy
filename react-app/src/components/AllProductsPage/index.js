@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { allProductsThunk } from "../../store/product";
 import { addCartItemThunk } from "../../store/cart";
 import { Link, useHistory } from "react-router-dom"
+import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
 
 function AllProductPage() {
@@ -13,6 +14,9 @@ function AllProductPage() {
 
     useEffect(() => {
         dispatch(allProductsThunk())
+        if (user) {
+            dispatch(allCartItemsThunk(user.id))
+        }
     }, [dispatch])
 
     const starRating = (rating) => {
