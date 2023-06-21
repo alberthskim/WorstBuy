@@ -67,8 +67,6 @@ function ReviewForm() {
                 display_name: displayName
             };
 
-            recommendation === 'True' ? newReview.recommendation = true : newReview.recommendation = false
-            purchased === 'True' ? newReview.purchased = true : newReview.purchased = false
             await dispatch(createReviewThunk(newReview, productId))
             return history.push(`/products/${productId}`)
         }
