@@ -47,7 +47,7 @@ function Navigation({ isLoaded }){
 
 								<div className='cart-logo'>
               						<i className="fas fa-shopping-cart"></i>
-              						{(!sessionUser || quantityAmount(cart) < 0 || !cart.length) ? null : <div className='cart-logo__amount'>{quantityAmount(cart)}</div>}
+              						{(!sessionUser || quantityAmount(cart) < 0 || !cart.length) ? null : <div className='cart-logo-amount'>{quantityAmount(cart)}</div>}
             					</div>
 							</NavLink>
 						</li>
