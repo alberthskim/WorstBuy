@@ -10,6 +10,6 @@ class ReviewForm(FlaskForm):
     review_url = StringField('Image')
     value = IntegerField("Value")
     quality = IntegerField("Quality")
-    purchased = BooleanField("Purchased?")
-    recommendation = BooleanField("Recommend?")
+    purchased = StringField("Purchased?")
+    recommendation = StringField("Recommend?")
     display_name = StringField("Display Name", validators = [DataRequired(), Length(min=4, max=50)])

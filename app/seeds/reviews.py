@@ -22,7 +22,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -36,7 +36,7 @@ def seed_reviews():
         value = 4,
         quality = 5,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -50,7 +50,7 @@ def seed_reviews():
         value = 3,
         quality = 2,
         purchased = True,
-        recommendation = "False",
+        recommendation = False,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -64,7 +64,7 @@ def seed_reviews():
         value = 5,
         quality = 4,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -78,7 +78,7 @@ def seed_reviews():
         value = 4,
         quality = 3,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -90,6 +90,7 @@ def seed_reviews():
         review_content = "I don't have kids but this looks kinda cool.",
         title = 'Tezzy Box Diapers',
         purchased = False,
+        recommendation = True,
         display_name = 'Demz',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -104,7 +105,7 @@ def seed_reviews():
         value = 2,
         quality = 3,
         purchased = True,
-        recommendation = "False",
+        recommendation = False,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -118,7 +119,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -132,7 +133,7 @@ def seed_reviews():
         value = 1,
         quality = 1,
         purchased = True,
-        recommendation = "False",
+        recommendation = False,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -146,7 +147,7 @@ def seed_reviews():
         value = 4,
         quality = 4,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -158,7 +159,7 @@ def seed_reviews():
         review_content = "Haven't purchased yet but looking to add it to my saved items",
         title = 'I WANT PLEASEEE',
         purchased = False,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -172,7 +173,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'MarnBarn123',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -186,7 +187,7 @@ def seed_reviews():
         value = 4,
         quality = 4,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'BobbieSMURDA',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )
@@ -200,7 +201,7 @@ def seed_reviews():
         value = 5,
         quality = 5,
         purchased = True,
-        recommendation = "True",
+        recommendation = True,
         display_name = 'BobbieSMURDA',
         created_at = random_date(datetime(2022, 1, 1), datetime(2023,5,1))
     )

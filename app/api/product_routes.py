@@ -124,8 +124,10 @@ def update_review(reviewId):
     review = Review.query.get(reviewId)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        review.rating = form.data['rating']
         review.review_content = form.data['review_content']
         review.title = form.data['title']
+        review.review_url = form.data['review_url']
         review.value = form.data['value']
         review.quality = form.data['quality']
         review.purchased = form.data['purchased']

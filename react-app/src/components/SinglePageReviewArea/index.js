@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { singleProductThunk} from "../../store/product";
 import './singlepagereviewarea.css'
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { deleteReviewThunk } from "../../store/product";
 import { singleProductThunk } from "../../store/product";
 
@@ -66,15 +66,10 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     let count = 0;
     let total = reviews.length
     for (let i = 0; i < reviews.length; i++) {
-      if(reviews[i].recommendation) {
-        if(reviews[i].recommendation === "True") {
+        if(reviews[i].recommendation > 0) {
           count++
         }
-      } else {
-        total--
-      }
     }
-
     return [count, total]
   };
 
@@ -109,8 +104,9 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
               </div>
               <div className="recommendation-info">
                 <p>
+                  {console.log("AVERAGE RECOMMENDATION", averageRecommendation[1])}
                   {averageRecommendation[1] ? (
-                    Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100)) > 50 ? (
+                    Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100)) >= 50 ? (
                       <>👍🏻</>
                     ) : (
                       <>👎🏻</>
@@ -154,17 +150,17 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <div className="rating-recommend">
                   <p>{starRating(review.rating)}</p>
                   <p>
-                    {review.recommendation ? review.recommendation ? (
+                    {review.recommendation > 0 ? (
                       <p>👍🏻 Would Recommend</p>
                     ) : (
                       <p>👎🏻 Would Not Recommend</p>
-                    ): (null)}
+                    )}
                   </p>
                 </div>
                 <div className="name-posted">
                   <p>
                     {review.displayName} - {review.createdAt},{" "}
-                    {review.purchased ? <p>✅ Verified Purchaser</p> : null}
+                    {review.purchased > 0 ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
                 <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
