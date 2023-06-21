@@ -52,7 +52,7 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <>
+          <div className="nav-bar-area-button">
             <button className="login-button-nav" onClick={() => {
               closeMenu()
               history.push('/login')
@@ -62,7 +62,7 @@ function ProfileButton({ user }) {
               closeMenu()
               history.push('/signup')
               }}>Create Account</button>
-          </>
+          </div>
         )}
       </ul>
     </>

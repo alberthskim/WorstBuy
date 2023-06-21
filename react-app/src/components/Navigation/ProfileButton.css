@@ -11,3 +11,17 @@
     background-color: white;
     color: #0046be;
 }
+
+.login-button-nav:hover {
+    cursor: pointer;
+}
+
+.sign-up-button-nav:hover {
+    cursor: pointer;
+}
+
+.nav-bar-area-button {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}

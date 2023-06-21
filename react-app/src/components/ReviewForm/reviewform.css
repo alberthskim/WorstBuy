@@ -30,7 +30,7 @@
 }
 
 .review-area {
-    border: 5px solid green;
+    /* border: 5px solid green; */
     display: flex;
 }
 
