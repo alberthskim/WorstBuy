@@ -150,6 +150,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <div className="rating-recommend">
                   <p>{starRating(review.rating)}</p>
                   <p>
+                    {console.log("THIS IS REVIEW RECOMMENDATIOn", review.recommendation)}
                     {review.recommendation > 0 ? (
                       <p>👍🏻 Would Recommend</p>
                     ) : (

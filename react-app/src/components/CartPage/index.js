@@ -10,6 +10,7 @@ function CartPage() {
     const cartItems = Object.values(useSelector(state => state.cart))
     const user = useSelector(state => state.session.user)
 
+    console.log("THIS IS THE CART ITEMS LIST", cartItems)
 
     useEffect(() => {
         if (!user) return history.push('/login')
@@ -28,6 +29,16 @@ function CartPage() {
         }
         return total
     }
+
+    const clearCart = (cartItems) => {
+        if (!cartItems.length) return alert("No items are in cart!")
+        for (let i = 0; i < cartItems.length; i++) {
+            let cartItem = cartItems[i]
+            dispatch(deleteCartItemThunk(cartItem.id, cartItem.userId, cartItem.productId))
+        }
+        return alert("Your purchase has been made! Please check your email for the order confirmation number. Thank you for shopping with Worst Buy.")
+    }
+
 
     const totalItemPrice = totalAmount(cartItems).toFixed(2)
     const estimatedTax = (totalAmount(cartItems) * .095).toFixed(2)
@@ -75,9 +86,9 @@ function CartPage() {
                         ))}
                     </div>
                 </div>
-                <div className="cart-bottom-area">
+                {/* <div className="cart-bottom-area">
                     <p>Saved Items</p>
-                </div>
+                </div> */}
 
 
             </div>
@@ -118,7 +129,7 @@ function CartPage() {
                     </div>
 
                     <div className="button-area">
-                        <button className="checkout" onClick={() => alert("Taking you to checkout Page")}>Checkout</button>
+                        <button className="checkout" onClick={() => clearCart(cartItems)}>Checkout</button>
                     </div>
                 </div>
 
