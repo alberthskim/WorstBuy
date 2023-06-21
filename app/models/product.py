@@ -31,5 +31,7 @@ class Product(db.Model):
             "imageUrl": self.image_url,
             "description": self.description,
             "reviews": {},
-            "productImages": {}
+            "productImages": {},
+            # "reviews": [review.to_dict() for review in self.reviews],
+            # "productImages": [product_image.to_dict() for product_image in self.product_images]
         }

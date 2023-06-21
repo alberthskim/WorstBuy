@@ -183,7 +183,7 @@ def seed_reviews():
         product_id = 1,
         rating = 4,
         review_content = "Not Bad...",
-        title = 'It"s cool',
+        title = "It's cool",
         value = 4,
         quality = 4,
         purchased = True,

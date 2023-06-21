@@ -79,63 +79,57 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     <>
       <div className="reviews-area">
         <div className="reviews-top">
-          <h2>Guest Ratings & Reviews</h2>
+          <h3 className="ratings-reviews-header">Guest Ratings & Reviews</h3>
 
           <div className="review-ratings-info">
             <div className="review-stars-ratings">
               <div className="reviews-info">
-                <p>
                   {reviews.length ? (
-                    <>
-                      <p>{getAverageRatingNumber(reviews)}</p>
-                      <p>{getAverageRating(reviews)}</p>
-                    </>
+                    <div>
+                      <h3 className="avg-header">{getAverageRatingNumber(reviews)}</h3>
+                      <p className="stars-area">{getAverageRating(reviews)}</p>
+                      <p className="rating-stars-area">{reviews.length} star ratings</p>
+                    </div>
                   ) : (
-                    <p>No Ratings For This Review</p>
+                    <div>
+                      <p className="no-ratings">No Ratings For This Review</p>
+                      <p>No Reviews Yet</p>
+                    </div>
                   )}
-                </p>
-                <p>
-                  {reviews.length ? (
-                    <>{reviews.length} star ratings</>
-                  ) : (
-                    <>No Reviews Yet</>
-                  )}{" "}
-                </p>
               </div>
               <div className="recommendation-info">
-                <p>
-                  {console.log("AVERAGE RECOMMENDATION", averageRecommendation[1])}
                   {averageRecommendation[1] ? (
                     Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100)) >= 50 ? (
-                      <>👍🏻</>
+                      <p>👍🏻</p>
                     ) : (
-                      <>👎🏻</>
+                      <p>👎🏻</p>
                     )
                   ) : (
                     <>No Recommendation At The Moment</>
                   )}
-                </p>
-                <p>
                   {averageRecommendation[1] ? (
                     <>
                       <p>{Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100))}% would recommend</p>
                       {averageRecommendation[1] > 1 ? <p>{averageRecommendation[1]} recommendations</p> : <p>{averageRecommendation[1]} recommendation</p>}
                     </>
                   ) : (
-                    <>No Recommendation Yet</>
+                    <p>No Recommendation Yet</p>
                   )}
-                </p>
               </div>
             </div>
 
             <div className="review-images-area">
               {reviews.map((image) => (
                 <div className="product-review-image">
-                  <img className="review-img-url" src={image.reviewUrl} />
+                  {!image.reviewUrl ? (
+                    null
+                  ): (
+                    <img className="review-img-url" src={image.reviewUrl} />
+                  )}
                 </div>
               ))}
               {user && !reviews.find(review => review.userId === user.id) && (
-                <button onClick={handleClick}>Write a Review</button>
+                <button className="review-button" onClick={handleClick}>Write a Review</button>
               )}
             </div>
           </div>
@@ -148,10 +142,10 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
               <div className="products-reviews">
                 <h3>{review.title}</h3>
                 <div className="rating-recommend">
-                  <p>{starRating(review.rating)}</p>
+                  <p className="star-rate">{starRating(review.rating)}</p>
                   <p>
-                    {console.log("THIS IS REVIEW RECOMMENDATIOn", review.recommendation)}
-                    {review.recommendation > 0 ? (
+                    {console.log("THIS IS THE REVIEW", review.recommendation)}
+                    {+review.recommendation ? (
                       <p>👍🏻 Would Recommend</p>
                     ) : (
                       <p>👎🏻 Would Not Recommend</p>
@@ -160,8 +154,10 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 </div>
                 <div className="name-posted">
                   <p>
-                    {review.displayName} - {review.createdAt},{" "}
-                    {review.purchased > 0 ? <p>✅ Verified Purchaser</p> : null}
+                    {review.displayName} - {review.createdAt},
+                  </p>
+                  <p>
+                    {+review.purchased ? <p>✅ Verified Purchaser</p> : null}
                   </p>
                 </div>
                 <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>

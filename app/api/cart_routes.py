@@ -95,3 +95,18 @@ def delete_cart():
     db.session.commit()
 
     return jsonify({"message": "Item has been sucessfully deleted!"})
+
+
+@cart_routes.route('/items/delete', methods=['DELETE'])
+@login_required
+def delete_all_cart():
+    """
+    Delete a cart
+    """
+    cartItems = CartItem.query.filter(CartItem.user_id == current_user.id)
+
+    [db.session.delete(item) for item in cartItems]
+
+    db.session.commit()
+
+    return jsonify({"message": "Cart has been sucessfully deleted!"})

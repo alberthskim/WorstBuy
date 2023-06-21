@@ -79,30 +79,30 @@ function SingleProductPage() {
                     </div>
 
                     <div className="left-side-right">
-                        <span>${product.price}</span>
                         <div className="ratings">
+                            <span>${product.price}</span>
                             <span>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
                         </div>
                         <div className="quantity-cart">
-                            <select value={product.quantity} onChange={quantityChange}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                            <select className="select-field" value={product.quantity} onChange={quantityChange}>
+                                <option value="1">Qty 1</option>
+                                <option value="2">Qty 2</option>
+                                <option value="3">Qty 3</option>
+                                <option value="4">Qty 4</option>
+                                <option value="5">Qty 5</option>
+                                <option value="6">Qty 6</option>
+                                <option value="7">Qty 7</option>
+                                <option value="8">Qty 8</option>
+                                <option value="9">Qty 9</option>
+                                <option value="10">Qty 10</option>
                             </select>
                             {!user ? (
-                            <button className="add-cart" onClick={() => {
+                            <button className="add-cart detail" onClick={() => {
                                 alert("Must Be Logged In First!")
                                 history.push('/login')
                                 }}>Add To Cart</button>
                         ) : (
-                            <button className="add-cart" onClick={() => {
+                            <button className="add-cart detail" onClick={() => {
                                 addToCart(product.id, quantity);
                                 alert("Added To Cart")
                                 }}>Add To Cart</button>
@@ -118,9 +118,9 @@ function SingleProductPage() {
             <div className="description-area">
 
                 <div className="bottom-description-area">
-                   <h1>About this item</h1>
-                   <h3>Description</h3>
+                   <h1 className="about-item">About this item</h1>
                    <div className="description">
+                        <h3 className="description-header">Description</h3>
                         <p>{product.description}</p>
                    </div>
                 </div>
