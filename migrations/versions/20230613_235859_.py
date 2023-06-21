@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('model', sa.String(length=255), nullable=True),
     sa.Column('category', sa.String(length=255), nullable=True),
-    sa.Column('price', sa.Integer(), nullable=False),
+    sa.Column('price', sa.Numeric(), nullable=False),
     sa.Column('image_url', sa.String(), nullable=False),
     sa.Column('description', sa.String(length=5000), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

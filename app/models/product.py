@@ -11,7 +11,7 @@ class Product(db.Model):
     name = db.Column(db.String(255), nullable = False)
     model = db.Column(db.String(255), unique = True)
     category = db.Column(db.String(255))
-    price = db.Column(db.Integer, nullable = False)
+    price = db.Column(db.Numeric, nullable = False)
     image_url = db.Column(db.String, nullable = False)
     description = db.Column(db.String(5000), nullable = False)
 
