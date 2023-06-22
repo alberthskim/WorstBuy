@@ -32,7 +32,6 @@ function CartPage() {
     const totalItemPrice = totalAmount(cartItems).toFixed(2)
     const estimatedTax = (totalAmount(cartItems) * .095).toFixed(2)
     const totalPriceAmount = (Number(totalItemPrice) + Number(estimatedTax)).toFixed(2)
-    console.log(totalPriceAmount)
 
     // if(!cartItems.length) return <h1>LOADING...</h1>
 
