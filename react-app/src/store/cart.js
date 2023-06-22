@@ -79,7 +79,6 @@ export const deleteCartItemThunk = (cartId, userId, productId) => async (dispatc
 
     if (response.ok) {
         const deletedProduct = await response.json()
-        console.log("THIS IS THE STUFF GETTING SENT TO ACTION", deletedProduct )
         await dispatch(deleteCartItem(cartId))
         return deletedProduct
     }

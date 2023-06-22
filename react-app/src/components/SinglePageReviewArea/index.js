@@ -14,7 +14,6 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
 
 
   // const userReview = reviews.find(review => review.userId === user.id)
-  // console.log("THIS IS THE userREVIEW", userReview)
 
 
   const handleClick = async (e) => {
