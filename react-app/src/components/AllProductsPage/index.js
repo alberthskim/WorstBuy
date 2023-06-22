@@ -17,13 +17,13 @@ function AllProductPage() {
         if (user) {
             dispatch(allCartItemsThunk(user.id))
         }
-    }, [dispatch])
+    }, [dispatch, user])
 
     const starRating = (rating) => {
         let stars = []
         for(let i = 1; i <= 5; i++) {
             if (i <= rating) {
-                stars.push(<i class="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+                stars.push(<i className="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
             } else {
                 stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
             }
