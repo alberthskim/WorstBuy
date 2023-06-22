@@ -1,6 +1,71 @@
-# Flask React Project
+# WorstBuy
 
-This is the starter for the Flask React project.
+<img src="https://i.imgur.com/2GHX5H6.png">
+
+Welcome to WorstBuy! Worstbuy is a fullstack application clone, inspired by a mixture of Bestbuy and Target. Create a user, add items to the cart, add some reviews, and shop for some of the "worst" products you can buy!
+
+Live site: https://worstbuy.onrender.com/
+
+## Overview
+
+App Academy January 2023 Cohort
+
+This is my second solo project and my capstone project. In order to graduate, I needed to create two full CRUD features. I chose my two features to be the ability to create, read, update, and delete for reviews and for cart.
+
+Throughout this process, I learned many new skills and gained a better understanding of Python and React/Redux throughout this process.
+
+- In the beginning of the project, I was querying my routes for the things I needed in my get All Products Route instead of utilizing Python's full potential of creating relationships. I didn't utilize Python's relationship in the models as I should have.
+- My state management for some of my features changed throughout my project as in the beginning, I tried to use one thunk to grab everything I needed. I learned that this method is not great as it would send a fetch request to my backend database for information that I did not need. As I started to understand and learn more, I was able to use my redux store state properly.
+- I learned that planning is very important before starting a whole project. When starting a new project, having a game plan to execute is needed in order to finish strong! 💪🏻
+
+
+## Wiki Links
+- [API Documentation](https://github.com/alberthskim/WorstBuy/wiki/Api-Documentation)
+- [Database Schema](https://github.com/alberthskim/WorstBuy/wiki/Database-Schema)
+- [Feature List](https://github.com/alberthskim/WorstBuy/wiki/Feature-List)
+- [User Stories](https://github.com/alberthskim/WorstBuy/wiki/User-Stories)
+- [WorstBuy WireFrame](https://github.com/alberthskim/WorstBuy/wiki/WorstBuy-WireFrame)
+
+
+## Technologies Used
+- Python
+- PostgresSQL
+- Flask
+- React/Redux
+- Imgur
+- Paint.js
+- Photopea
+- HTML/CSS
+
+
+## Future Project Goals
+
+- Implement more features and additionals to project:
+    - Full CRUD for Products (Admin Access only)
+    - Full CRUD for Saved Items
+    - Implement AWS for picture adding
+    - Search Bar for finding products
+    - Category Tabs for finding products according to       product type
+    - Implement a Google API for grabbing nearest stores
+    - Implement to add comments to reviews
+    - Implement a helpful/unhelpful button
+    - Implement an automated bot for helping users with question
+    - For non-logged in users, add the ability to still add items to the cart
+    - A checkout page where users can get a real life feeling of checking out products.
+    - Refactor my code to make it easier for others to read
+    - More CSS!
+    - TO NEVER STOP LEARNING!!!
+
+
+## Meet The Developer
+- Albert Kim
+<img src="https://i.imgur.com/YxvVUbL.png" width=20> [LinkedIn](https://www.linkedin.com/in/albertkim01/") <img src="https://i.imgur.com/e3EquH6.png" width=20> [GitHub](https://github.com/alberthskim)
+
+
+
+
+
+<!-- This is the starter for the Flask React project.
 
 ## Getting started
 1. Clone this repository (only this branch)
@@ -145,4 +210,4 @@ successfully deployed your Flask application to Render! You can find the URL for
 your site just below the name of the Web Service at the top of the page.
 
 [Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+[Dashboard]: https://dashboard.render.com/ -->

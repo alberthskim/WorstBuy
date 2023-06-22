@@ -100,7 +100,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
         total--
       }
     }
-    
+
     if (count === 0) return 0;
     return (count / total).toFixed(1);
   }
@@ -129,19 +129,17 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
               </div>
               <div className="value-quality">
                     {getAverageValue(reviews) ? (
-                    <div>
-                      <h3>{getAverageValue(reviews)}</h3>
-                      <p>Value</p>
-                      <p>out of 5</p>
+                    <div className="value-area">
+                      <h3 className="value-num">{getAverageValue(reviews)}</h3>
+                      <p className="value-wording">Value<br />out of 5</p>
                     </div>
                     ) : (
                       null
                     )}
                     {getAverageQuality(reviews) ? (
-                      <div>
-                        <h3>{getAverageQuality(reviews)}</h3>
-                        <p>Quality</p>
-                        <p>out of 5</p>
+                      <div className="quality-area">
+                        <h3 className="quality-num">{getAverageQuality(reviews)}</h3>
+                        <p className="quality-wording">Quality<br />out of 5</p>
                       </div>
                     ) : (
                       null
@@ -176,7 +174,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   ): (
                     <>
                       <h3>Review Images</h3>
-                      <img className="review-img-url" src={image.reviewUrl} />
+                      <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"}/>
                     </>
                   )}
                 </div>

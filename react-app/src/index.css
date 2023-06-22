@@ -1,2 +1,8 @@
 /* TODO Add site wide styles */
+* {
+    font-family: 'Alike', serif;
+}
 
+button:hover {
+    cursor: pointer;
+}
