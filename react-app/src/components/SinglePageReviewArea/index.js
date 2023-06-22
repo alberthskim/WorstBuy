@@ -174,7 +174,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   ): (
                     <>
                       <h3>Review Images</h3>
-                      <img className="review-img-url" src={image.reviewUrl} />
+                      <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"}/>
                     </>
                   )}
                 </div>
