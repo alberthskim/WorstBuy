@@ -97,7 +97,7 @@
 .name-posted {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .star-rate {
@@ -124,4 +124,23 @@
 
 .edit-delete > button:hover {
     cursor: pointer;
+}
+
+.verified {
+    color: green;
+}
+
+.far {
+    color: green;
+}
+
+.fa-times {
+    color: red;
+}
+
+.value-quality {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }

@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { singleProductThunk } from "../../store/product";
 import './reviewform.css'
 import { createReviewThunk } from "../../store/review";
+import { allCartItemsThunk } from "../../store/cart";
 
 function ReviewForm() {
     const dispatch = useDispatch()
@@ -74,6 +75,9 @@ function ReviewForm() {
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
+        if(user) {
+            dispatch(allCartItemsThunk(user.id))
+        }
     }, [dispatch])
 
     if(!user) history.push('/login')

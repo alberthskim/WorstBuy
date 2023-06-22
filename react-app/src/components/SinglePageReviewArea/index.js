@@ -27,7 +27,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
     let stars = []
     for(let i = 1; i <= 5; i++) {
         if (i <= rating) {
-            stars.push(<i class="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+            stars.push(<i className="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
         } else {
             stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
         }
@@ -75,6 +75,36 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
 
   let averageRecommendation = getRecommendationAverage(reviews);
 
+  const getAverageValue = (reviews) => {
+    let count = 0;
+    let total = reviews.length
+    for(let i = 0; i < reviews.length; i++) {
+      if(reviews[i].value > 0) {
+        count += reviews[i].value
+      } else {
+        total--
+      }
+    }
+
+    if (count === 0) return 0;
+    return (count / total).toFixed(1);
+  }
+
+  const getAverageQuality = (reviews) => {
+    let count = 0;
+    let total = reviews.length
+    for(let i = 0; i < reviews.length; i++) {
+      if(reviews[i].quality > 0) {
+        count += reviews[i].quality
+      } else {
+        total--
+      }
+    }
+    
+    if (count === 0) return 0;
+    return (count / total).toFixed(1);
+  }
+
   return (
     <>
       <div className="reviews-area">
@@ -97,12 +127,32 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     </div>
                   )}
               </div>
+              <div className="value-quality">
+                    {getAverageValue(reviews) ? (
+                    <div>
+                      <h3>{getAverageValue(reviews)}</h3>
+                      <p>Value</p>
+                      <p>out of 5</p>
+                    </div>
+                    ) : (
+                      null
+                    )}
+                    {getAverageQuality(reviews) ? (
+                      <div>
+                        <h3>{getAverageQuality(reviews)}</h3>
+                        <p>Quality</p>
+                        <p>out of 5</p>
+                      </div>
+                    ) : (
+                      null
+                    )}
+              </div>
               <div className="recommendation-info">
                   {averageRecommendation[1] ? (
                     Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100)) >= 50 ? (
-                      <p>👍🏻</p>
+                      <p><i class="far fa-check-circle fa-lg"></i></p>
                     ) : (
-                      <p>👎🏻</p>
+                      <p><i class="fas fa-times fa-lg"></i></p>
                     )
                   ) : (
                     <>No Recommendation At The Moment</>
@@ -124,7 +174,10 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   {!image.reviewUrl ? (
                     null
                   ): (
-                    <img className="review-img-url" src={image.reviewUrl} />
+                    <>
+                      <h3>Review Images</h3>
+                      <img className="review-img-url" src={image.reviewUrl} />
+                    </>
                   )}
                 </div>
               ))}
@@ -144,20 +197,19 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <div className="rating-recommend">
                   <p className="star-rate">{starRating(review.rating)}</p>
                   <p>
-                    {console.log("THIS IS THE REVIEW", review.recommendation)}
                     {review.recommendation === "True" ? (
-                      <p>👍🏻 Would Recommend</p>
+                      <p><i className="far fa-check-circle"></i> Would Recommend</p>
                     ) : (
-                      <p>👎🏻 Would Not Recommend</p>
+                      <p><i className="fas fa-times"></i> Would Not Recommend</p>
                     )}
                   </p>
                 </div>
                 <div className="name-posted">
                   <p>
-                    {review.displayName} - {review.createdAt},
+                    {review.displayName} - {review.createdAt.slice(0,16)},
                   </p>
                   <p>
-                    {review.purchased === "True" ? <p>✅ Verified Purchaser</p> : null}
+                    {review.purchased === "True" ? <p className="verified">Verified Purchaser</p> : null}
                   </p>
                 </div>
                 <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
