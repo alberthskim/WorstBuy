@@ -8,9 +8,9 @@
 }
 
 .default-preview-image {
-    height: 100%;
+    height: 700px;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .left-side-left {

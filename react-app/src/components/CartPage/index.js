@@ -47,12 +47,11 @@ function CartPage() {
                     <div className="cart-items-stuff">
                         {cartItems.map((item) => (
                             <>
-                                {console.log("THE MAPPY MAP",item)}
                                 <div className="individual-item">
                                     <img className="cart-item-image" src={item.productImage} alt="item-img"/>
                                     <p>{item.productName}</p>
                                     <div className="quantity-price">
-                                    <div className="quantity-select">
+                                        <div className="quantity-select">
                                             <select value={item.quantity} onChange={(e) => quantityChange(item.productId, e.target.value)}>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -65,7 +64,6 @@ function CartPage() {
                                                 <option value="9">9</option>
                                                 <option value="10">10</option>
                                             </select>
-
                                             <p className="remove-item" onClick={() => dispatch(deleteCartItemThunk(item.id, user.id, item.productId))}>remove</p>
                                         </div>
                                         <p>${item.productPrice}</p>
