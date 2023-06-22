@@ -184,13 +184,14 @@ def seed_products():
 
     product19 = Product(
         user_id = 1,
-        name = 'Watermelon Flavor Creme Oreo',
-        model = 'S92130',
-        category = "Groceries",
-        price = 7.99,
-        image_url = 'https://i.imgur.com/QpgaEQ0.jpg',
-        description = 'Limited Edition- Swedish Fish Flavor cream Oreo. Eat semi-healthy.'
+        name = 'The "What Am I Wiping With?" Toilet Paper',
+        model = 'S92140',
+        category = "Beauty & Product",
+        price = 14.99,
+        image_url = 'https://i.imgur.com/idNmyXT.png',
+        description = 'The toilet paper without stains. Wipe and hope for the best!'
     )
+    
     product20 = Product(
         user_id = 1,
         name = 'Snot Dispenser',

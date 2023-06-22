@@ -5,14 +5,19 @@ import { useHistory, Link } from "react-router-dom";
 import QrCode from '../../assets/qr-code.png';
 import worstphone from '../../assets/worstbuy-phone.png';
 import './landingpage.css'
+import { allCartItemsThunk } from "../../store/cart";
 
 function LandingPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const products = Object.values(useSelector(state => state.products.allProducts))
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(allProductsThunk())
+        if (user) {
+            dispatch(allCartItemsThunk(user.id))
+        }
     }, [dispatch])
 
     const getRandomProducts = (products) => {

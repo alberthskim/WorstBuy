@@ -4,7 +4,8 @@ import { singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
 import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
-import { addCartItemThunk } from "../../store/cart";
+import { addCartItemThunk, allCartItemsThunk } from "../../store/cart";
+
 
 function SingleProductPage() {
     const dispatch = useDispatch()
@@ -25,13 +26,16 @@ function SingleProductPage() {
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
+        if (user) {
+			dispatch(allCartItemsThunk(user.id))
+		}
     }, [dispatch])
 
     const starRating = (rating) => {
         let stars = []
         for(let i = 1; i <= 5; i++) {
             if (i <= rating) {
-                stars.push(<i class="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+                stars.push(<i className="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
             } else {
                 stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
             }
