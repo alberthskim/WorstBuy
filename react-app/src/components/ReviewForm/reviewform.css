@@ -22,12 +22,13 @@
 
 .review-img {
     width: 100%;
-    height: 50%;
+    height: 500px;
+    object-fit: fill;
 }
 
-.review-container {
+/* .review-container {
     border: 5px solid red;
-}
+} */
 
 .review-area {
     /* border: 5px solid green; */
@@ -35,12 +36,12 @@
 }
 
 .review-product-image {
-    border: 5px solid blue;
+    /* border: 5px solid blue; */
     width: 30%;
 }
 
 .form-info {
-    border: 5px solid purple;
+    /* border: 5px solid purple; */
     width: 70%;
     padding-left: 2rem;
 }
@@ -77,4 +78,21 @@
 .submit-review-button {
     margin-top: 1rem;
     padding: .5rem 1rem;
+    background-color: #0046be;
+    color: white;
+    border-radius: 5px;
+    border-color:#0046be;
+}
+
+.submit-review-button:hover {
+    cursor: pointer
+}
+
+.choose-option {
+    margin-bottom: 2rem;
+}
+
+.purchased-area {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid lightgray;
 }
