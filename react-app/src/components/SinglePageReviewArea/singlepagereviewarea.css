@@ -144,3 +144,20 @@
     justify-content: center;
     gap: 2rem;
 }
+
+.value-num, .quality-num {
+    border: 2px solid green;
+    border-radius: 50%;
+    padding: 1rem;
+}
+
+.value-area, .quality-area {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.value-wording, .quality-wording {
+    color: gray;
+    align-items: center;
+}
