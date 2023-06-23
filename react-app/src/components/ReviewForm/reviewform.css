@@ -1,3 +1,25 @@
+.review-container {
+    padding: 2rem;
+}
+
+.Review-Item-Title {
+    font-weight: bolder;
+    padding-bottom: 1rem;
+}
+
+.product-model-review {
+    padding-bottom: 1.5rem;
+    font-size: 14px;
+}
+
+.insert-pic {
+    margin-top: 1rem;
+}
+
+.review-content-section {
+    margin-top: 1rem;
+}
+
 .empty {
     color: lightgray;
 }
@@ -14,10 +36,13 @@
 .choose-option {
     display: flex;
     flex-direction: column;
+    gap: .5rem;
+    margin: 0;
 }
 
 .errors {
     color: red;
+    font-size: 14px;
 }
 
 .review-img {
@@ -25,10 +50,6 @@
     height: 500px;
     object-fit: fill;
 }
-
-/* .review-container {
-    border: 5px solid red;
-} */
 
 .review-area {
     /* border: 5px solid green; */
@@ -50,7 +71,31 @@
     width: 60%;
     resize: none;
     height: 1.5rem;
+    padding-left: .5rem;
+    padding-top: .5rem;
     /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: .5rem;
+}
+
+.review-title, .image-upload {
+    margin-top: .5rem;
+}
+
+.review-text::placeholder, .review-text-info::placeholder, .review-title::placeholder {
+    color: gray;
+    font-size: bolder;
+}
+
+.overall-rating-header-review {
+    margin-top: 1rem;
+}
+
+.stars-for-rating {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 
 .image-upload {
@@ -58,21 +103,60 @@
     padding: .4rem .5rem;
 }
 
-.under-review {
+.under-review, .under-review-text-box {
     font-size: 11px;
-    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+}
+
+
+.tell-us {
+    margin-top: 1rem;
+}
+
+
+.quality-header, .val-header {
+    margin-top: 1rem;
+}
+
+.quality-value {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.qual, .val {
+    display: flex;
+    flex-direction: column;
 }
 
 .review-title {
-    width: 40%;
-    padding: .5rem 1rem;
+    width: 43%;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: .5rem;
 }
 
 .review-text-info {
-    width: 44%;
+    width: 43%;
+    padding-left: .5rem;
+    padding-top: .5rem;
     outline: none;
     height: 8rem;
     resize: none;
+    margin-top: 1rem;
+}
+
+.recommendation-area {
+    margin-top: 1rem;
+}
+
+.choose-option {
+    margin-top: .5rem;
+}
+
+.option-header {
+    font-size: 13px;
+    padding-top: .5rem;
 }
 
 .submit-review-button {
@@ -80,8 +164,9 @@
     padding: .5rem 1rem;
     background-color: #0046be;
     color: white;
+    font-weight: bolder;
     border-radius: 5px;
-    border-color:#0046be;
+    border:1px solid #0046be;
 }
 
 .submit-review-button:hover {
