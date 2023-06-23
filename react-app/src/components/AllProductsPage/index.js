@@ -55,11 +55,12 @@ function AllProductPage() {
                                     <img className="product-images"src={product.imageUrl} alt="products" />
                                 </div>
                                 <div className="product-deets">
-                                    <h3>{product.name}</h3>
+                                    <h3 className="product-name-all">{product.name}</h3>
+                                    <p className="model-num">Model: {product.model}</p>
                                     <p>{getAverageRating(product.reviews)} ({product.reviews.length})</p>
                                 </div>
                                 <div className="product-price">
-                                    <p>${product.price}</p>
+                                    <p>$ {product.price}</p>
                                 </div>
                             </div>
                         </Link>

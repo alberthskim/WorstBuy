@@ -114,7 +114,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
             <div className="review-stars-ratings">
               <div className="reviews-info">
                   {reviews.length ? (
-                    <div>
+                    <div className="review-things">
                       <h3 className="avg-header">{getAverageRatingNumber(reviews)}</h3>
                       <p className="stars-area">{getAverageRating(reviews)}</p>
                       <p className="rating-stars-area">{reviews.length} star ratings</p>
@@ -172,7 +172,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     null
                   ): (
                     <>
-                      <h3>Review Images</h3>
+                      <h3 className="review-image-header">Review Images</h3>
                       <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"}/>
                     </>
                   )}
@@ -188,6 +188,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
         <div className="Reviews-made">
 
           <div className="individual-reviews">
+            <h4 className="review-amount">We found {reviews.length} Matching Reviews</h4>
             {reviews.toReversed().map((review) => (
               <div className="products-reviews">
                 <h3>{review.title}</h3>
@@ -202,7 +203,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                   </p>
                 </div>
                 <div className="name-posted">
-                  <p>
+                  <p className="display-name">
                     {review.displayName} - {review.createdAt.slice(0,16)},
                   </p>
                   <p>

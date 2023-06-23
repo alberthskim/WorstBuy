@@ -52,7 +52,7 @@ function LandingPage() {
             <div className="left-side-content">
 
                     <h2>Welcome To Worst Buy</h2>
-                    <p>Browse for the worst things you can possibly purchase ever!</p>
+                    <div className="browse">Browse for the worst things you can possibly purchase ever!</div>
                     <div className="shop-now-button">
                         <button className="shop-now" onClick={handleClick}>Shop Now</button>
                     </div>

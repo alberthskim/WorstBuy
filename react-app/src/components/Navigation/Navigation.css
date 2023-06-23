@@ -5,7 +5,7 @@
   min-width: 10em;
   width: auto;
   height: auto;
-  right: 7em;
+  right: 5em;
   margin-top: 10px;
   padding: 0.5em;
   background-color: white;
@@ -39,12 +39,11 @@ li {
 
 .nav-list {
   display: flex;
-  width: 95%;
+  width: 98%;
   align-items: center;
   justify-content: space-between;
   padding-bottom: .5rem;
   border-bottom: 1px solid lightgray;
-  margin: 0;
 }
 
 .logo {
@@ -53,6 +52,8 @@ li {
   height: 70px;
   width: 170px;
   padding: 1rem;
+  margin-left: 1rem;
+  margin-top: .5rem;
 }
 
 /* .search-bar {

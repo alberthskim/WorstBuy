@@ -65,7 +65,8 @@ function SingleProductPage() {
     return (
         <div className="whole-page">
 
-            <h2>{product.name}</h2>
+            <h2 className="product-name-single">{product.name}</h2>
+            <p className="product-model-num">Model: {product.model}</p>
             <div className="product-info">
 
                     <div className="left-side-left">
@@ -125,7 +126,7 @@ function SingleProductPage() {
                    <h1 className="about-item">About this item</h1>
                    <div className="description">
                         <h3 className="description-header">Description</h3>
-                        <p>{product.description}</p>
+                        <p className="product-description">{product.description}</p>
                    </div>
                 </div>
 

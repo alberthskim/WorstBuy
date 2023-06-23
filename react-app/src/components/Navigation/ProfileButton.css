@@ -4,11 +4,15 @@
 
 .login-button-nav {
     background-color: #0046be;
+    border: 1px solid #0046be;
+    border-radius: 5px;
     color: white;
 }
 
 .sign-up-button-nav {
     background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
     color: #0046be;
 }
 
