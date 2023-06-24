@@ -52,7 +52,7 @@ function LandingPage() {
             <div className="left-side-content">
 
                     <h2>Welcome To Worst Buy</h2>
-                    <p>Browse for the worst things you can possibly purchase ever!</p>
+                    <div className="browse">Browse for the worst things you can possibly purchase ever!</div>
                     <div className="shop-now-button">
                         <button className="shop-now" onClick={handleClick}>Shop Now</button>
                     </div>
@@ -81,8 +81,8 @@ function LandingPage() {
                     <div className="bottom-left-side">
                         <h2 className="shop-stuff">Shop smarter, faster</h2>
                         <div className="qrcode-area">
-                            <img src={worstphone} className="worst-phone"/>
-                            <img src={QrCode} className="qrcode"/>
+                            <img src={worstphone} className="worst-phone" alt="phone"/>
+                            <img src={QrCode} className="qrcode" alt="code"/>
                         </div>
                         <p className="scan-code">Scan the QR code to check out the site on your phone!</p>
                     </div>

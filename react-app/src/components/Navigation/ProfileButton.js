@@ -40,17 +40,29 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="nav-modal-button" onClick={openMenu}>
+      {user ? (
+        <div className="login-user-stuff">
+          <i className="fas fa-user-circle" />
+          <p>Hi, {user.firstName}</p>
+        </div>
+
+      ) : (
+
+        <div className="login-user-stuff">
+          <i className="fas fa-user-circle" />
+          <p>Sign In</p>
+        </div>
+      )}
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>Hi, {user.firstName}</li>
+          <div className="login-user">
+            <li className="welcome">Hi, {user.firstName} {user.lastName}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className="logout-button" onClick={handleLogout}>Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <div className="nav-bar-area-button">
             <button className="login-button-nav" onClick={() => {

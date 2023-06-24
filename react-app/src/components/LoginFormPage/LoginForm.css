@@ -7,7 +7,7 @@
     border-radius: 5px;
     padding-top: 2rem;
     width: 28%;
-    height: 58%;
+    height: 62%;
     margin: 0 auto;
     position: relative;
     top: 2rem;
@@ -104,4 +104,8 @@
 .demo-name:hover {
     cursor: pointer;
     box-shadow: 0px 0px 10px gray;
+}
+
+.create-acc {
+    padding-bottom: 1rem;
 }
