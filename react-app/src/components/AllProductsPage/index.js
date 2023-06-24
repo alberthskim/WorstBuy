@@ -6,7 +6,6 @@ import { Link, useHistory } from "react-router-dom"
 import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
 import AddToCartModal from "../AddToCartModal";
-import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 
 
@@ -23,7 +22,7 @@ function AllProductPage() {
         if (user) {
             dispatch(allCartItemsThunk(user.id))
         }
-    }, [dispatch, user])
+    }, [dispatch])
 
 
     const starRating = (rating) => {
@@ -52,8 +51,7 @@ function AllProductPage() {
     };
 
     const findProductCheck = (product) => {
-        const singleCartItem = cartItems.find(item => item.id === product.id)
-        console.log("THE SINGLE CART ITEM", singleCartItem)
+        const singleCartItem = cartItems.find(item => item.productId === product.id)
         if (!singleCartItem) {
             dispatch(addCartItemThunk(product.id, 1));
             return setModalContent(<AddToCartModal product={product} />)

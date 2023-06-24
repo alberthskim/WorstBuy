@@ -1,19 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { singleProductThunk} from "../../store/product";
 import './singlepagereviewarea.css'
 import { useHistory } from "react-router-dom";
 import { deleteReviewThunk } from "../../store/product";
-import { singleProductThunk } from "../../store/product";
 
-function SinglePageReviewArea({ product, productId, allReviews}) {
+function SinglePageReviewArea({ productId, allReviews}) {
   const reviews = Object.values(allReviews)
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const dispatch = useDispatch()
 
-
-  // const userReview = reviews.find(review => review.userId === user.id)
 
 
   const handleClick = async (e) => {
@@ -147,9 +143,9 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
               <div className="recommendation-info">
                   {averageRecommendation[1] ? (
                     Math.ceil(parseInt((averageRecommendation[0] / averageRecommendation[1])* 100)) >= 50 ? (
-                      <p><i class="far fa-check-circle fa-lg"></i></p>
+                      <p><i className="far fa-check-circle fa-lg"></i></p>
                     ) : (
-                      <p><i class="fas fa-times fa-lg"></i></p>
+                      <p><i className="fas fa-times fa-lg"></i></p>
                     )
                   ) : (
                     <>No Recommendation At The Moment</>
@@ -170,10 +166,10 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <div className="product-review-image">
                   {!image.reviewUrl ? (
                     null
-                  ): (
+                  ) : (
                     <>
                       <h3 className="review-image-header">Review Images</h3>
-                      <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"}/>
+                      <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"} alt="review-img"/>
                     </>
                   )}
                 </div>
@@ -194,13 +190,11 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                 <h3>{review.title}</h3>
                 <div className="rating-recommend">
                   <p className="star-rate">{starRating(review.rating)}</p>
-                  <p>
                     {review.recommendation === "True" ? (
                       <p><i className="far fa-check-circle"></i> Would Recommend</p>
                     ) : (
                       <p><i className="fas fa-times"></i> Would Not Recommend</p>
                     )}
-                  </p>
                 </div>
                 <div className="name-posted">
                   <p className="display-name">
@@ -210,7 +204,7 @@ function SinglePageReviewArea({ product, productId, allReviews}) {
                     {review.purchased === "True" ? <p className="verified">Verified Purchaser</p> : null}
                   </p>
                 </div>
-                <div className="review-content" style={{'word-break': 'break-word'}}>{review.reviewContent}</div>
+                <div className="review-content" style={{wordBreak: 'break-word'}}>{review.reviewContent}</div>
 
                 {user && user.id === review.userId && (
                   <div className="edit-delete">

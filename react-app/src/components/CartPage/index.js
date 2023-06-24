@@ -12,7 +12,9 @@ function CartPage() {
 
 
     useEffect(() => {
-        if (!user) return history.push('/login')
+        if (!user) {
+            return history.push('/login')
+        }
         dispatch(allCartItemsThunk(user.id))
     }, [dispatch])
 
@@ -46,10 +48,13 @@ function CartPage() {
                         <div className="cart-items-stuff">
                             {cartItems.map((item) => (
                                 <div className="individual-item">
+                                    {console.log("This is the item",item)}
+                                    <Link to={`/products/${item.productId}`} style={{ textDecoration: 'none' }}>
                                     <div className="image-name">
                                         <img className="cart-item-image" src={item.productImage} alt="item-img"/>
                                         <h4 className="cart-product-name">{item.productName}</h4>
                                     </div>
+                                    </Link>
                                     <div className="quantity-price">
                                         <div className="quantity-select">
                                             <select className="select-option" value={item.quantity} onChange={(e) => quantityChange(item.productId, e.target.value)}>

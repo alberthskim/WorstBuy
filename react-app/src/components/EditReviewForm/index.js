@@ -10,9 +10,7 @@ function EditReviewForm() {
     const history = useHistory()
     const { productId, reviewId } = useParams()
     const product = useSelector(state => state.products.singleProduct)
-    const reviews = useSelector(state => state.products.singleProduct.reviews)
     const user = useSelector(state => state.session.user)
-    // const currentReview = reviews[reviewId]
 
 
     const [rating, setRating] = useState(0)

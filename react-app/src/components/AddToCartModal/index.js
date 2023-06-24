@@ -45,14 +45,17 @@ function AddToCartModal({product}) {
                         <i className="fas fa-check"></i>
                     </div>
                     <div className="product-modal-info">
-                        <img className="modal-image" src={imageUrl} />
+                        <img className="modal-image" src={imageUrl} alt="pic"/>
                         <p className="product-modal-price">$ {price}</p>
                     </div>
                 </div>
                 <div className="right-side-modal">
                     <div className="cart-info-modal">
                         <p className="cart-item-subtotal">Cart Subtotal ({totalQuantityItem} items): ${totalItemPrice}</p>
-                        <button className="cart-modal-button" onClick={() => history.push('/cart')}>Go To Cart</button>
+                        <button className="cart-modal-button" onClick={() => {
+                            history.push('/cart');
+                            closeModal();
+                            }}>Go To Cart</button>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,9 @@ import { singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
 import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
-import { addCartItemThunk, allCartItemsThunk } from "../../store/cart";
+import { addCartItemThunk, allCartItemsThunk, addToCart } from "../../store/cart";
+import AddToCartModal from "../AddToCartModal";
+import { useModal } from "../../context/Modal";
 
 
 function SingleProductPage() {
@@ -16,13 +18,10 @@ function SingleProductPage() {
     const reviews = product?.reviews
     const cartItems = Object.values(useSelector(state => state.cart))
     const [quantity, setQuantity] = useState(1)
+    const { setModalContent, setOnModalClose } = useModal();
 
     const quantityChange = (e) => {
         setQuantity(e.target.value);
-    }
-
-    const addToCart = (productId, quantity) => {
-        dispatch(addCartItemThunk(productId, parseInt(quantity)))
     }
 
     useEffect(() => {
@@ -30,7 +29,7 @@ function SingleProductPage() {
         if (user) {
 			dispatch(allCartItemsThunk(user.id))
 		}
-    }, [dispatch])
+    }, [dispatch, user])
 
     const starRating = (rating) => {
         let stars = []
@@ -58,15 +57,22 @@ function SingleProductPage() {
         return starRating((number / total).toFixed(1));
       };
 
-      const findProductCheck = (productId) => {
-        const singleCartItem = cartItems.find(item => item.productId === productId)
-        if (!singleCartItem) return false;
+    const findProductCheck = (product, quantity) => {
+        const singleCartItem = cartItems.find(item => item.productId === product.id)
+        if (!singleCartItem) {
+            dispatch(addCartItemThunk(productId, Number(quantity)));
+            return setModalContent(<AddToCartModal product={product} />)
+        }
+
         let currentQuantity = Number(singleCartItem.quantity)
         let totalCurrent = currentQuantity + Number(quantity)
         if (currentQuantity >= 10 || totalCurrent > 10) {
-            return true;
+            alert("Limit of 10 quantities per item allowed")
+            return
         } else {
-            return false;
+            dispatch(addCartItemThunk(productId, Number(quantity)));
+            setModalContent(<AddToCartModal product={product} />)
+            return
         }
     }
 
@@ -91,7 +97,7 @@ function SingleProductPage() {
 
                     <div className="middle-area">
                         <div className="main-pic">
-                            <img className="default-preview-image" src={product.imageUrl}></img>
+                            <img className="default-preview-image" src={product.imageUrl} alt="product-img"></img>
                         </div>
                     </div>
 
@@ -119,17 +125,10 @@ function SingleProductPage() {
                                     history.push('/login')
                                     }}>Add To Cart</button>
                             ) : (
-                                findProductCheck(product.id) ? (
-                                        <button className="add-cart detail" onClick={() => {
-                                            alert("Limit of 10 quantities per item allowed")
-                                            }}>Add To Cart</button>
-                                    ) : (
-                                        <button className="add-cart detail" onClick={() => {
-                                            addToCart(product.id, quantity);
-                                            alert("Added To Cart")
-                                            }}>Add To Cart</button>
-                                ))
-                            }
+                                <button className="add-cart detail" onClick={() => {
+                                    findProductCheck(product, quantity)
+                                }}>Add To Cart</button>
+                            )}
                         </div>
                     </div>
 
@@ -150,7 +149,7 @@ function SingleProductPage() {
 
             </div>
             <div className="review-area">
-                <SinglePageReviewArea product={product} productId={productId} allReviews={reviews}/>
+                <SinglePageReviewArea productId={productId} allReviews={reviews}/>
             </div>
 
 
