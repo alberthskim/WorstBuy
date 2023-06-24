@@ -5,12 +5,18 @@ import { addCartItemThunk } from "../../store/cart";
 import { Link, useHistory } from "react-router-dom"
 import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
+import AddToCartModal from "../AddToCartModal";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
+
 
 function AllProductPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const products = Object.values(useSelector(state => state.products.allProducts))
+    const cartItems = Object.values(useSelector(state => state.cart))
     const user = useSelector(state => state.session.user)
+    const { setModalContent, setOnModalClose } = useModal();
 
     useEffect(() => {
         dispatch(allProductsThunk())
@@ -18,6 +24,7 @@ function AllProductPage() {
             dispatch(allCartItemsThunk(user.id))
         }
     }, [dispatch, user])
+
 
     const starRating = (rating) => {
         let stars = []
@@ -43,6 +50,25 @@ function AllProductPage() {
         }
         return starRating((number / total).toFixed(1));
     };
+
+    const findProductCheck = (product) => {
+        const singleCartItem = cartItems.find(item => item.id === product.id)
+        console.log("THE SINGLE CART ITEM", singleCartItem)
+        if (!singleCartItem) {
+            dispatch(addCartItemThunk(product.id, 1));
+            return setModalContent(<AddToCartModal product={product} />)
+        }
+
+        let currentCart = Number(singleCartItem.quantity)
+        if (currentCart >= 10) {
+            alert("Limit of 10 quantities per item allowed")
+            return
+        } else {
+            dispatch(addCartItemThunk(product.id, 1));
+            setModalContent(<AddToCartModal product={product} />)
+            return
+        }
+    }
 
     return (
         <div className="main-area-product">
@@ -70,10 +96,10 @@ function AllProductPage() {
                                 history.push('/login')
                                 }}>Add To Cart</button>
                         ) : (
+
                             <button className="add-cart" onClick={() => {
-                                dispatch(addCartItemThunk(product.id, 1));
-                                alert("Added To Cart")
-                                }}>Add To Cart</button>
+                                findProductCheck(product)
+                            }}>Add To Cart</button>
                         )}
                     </div>
                 ))}
@@ -82,4 +108,4 @@ function AllProductPage() {
     )
 }
 
-export default AllProductPage
+export default AllProductPage;

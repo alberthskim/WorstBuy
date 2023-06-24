@@ -14,6 +14,7 @@ function SingleProductPage() {
     const product = useSelector(state => state.products.singleProduct)
     const user = useSelector(state => state.session.user)
     const reviews = product?.reviews
+    const cartItems = Object.values(useSelector(state => state.cart))
     const [quantity, setQuantity] = useState(1)
 
     const quantityChange = (e) => {
@@ -57,6 +58,17 @@ function SingleProductPage() {
         return starRating((number / total).toFixed(1));
       };
 
+      const findProductCheck = (productId) => {
+        const singleCartItem = cartItems.find(item => item.productId === productId)
+        if (!singleCartItem) return false;
+        let currentQuantity = Number(singleCartItem.quantity)
+        let totalCurrent = currentQuantity + Number(quantity)
+        if (currentQuantity >= 10 || totalCurrent > 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     if (!product || !Object.values(product).length) {
         return <div>Loading...</div>
@@ -102,16 +114,22 @@ function SingleProductPage() {
                                 <option value="10">Qty 10</option>
                             </select>
                             {!user ? (
-                            <button className="add-cart detail" onClick={() => {
-                                alert("Must Be Logged In First!")
-                                history.push('/login')
-                                }}>Add To Cart</button>
-                        ) : (
-                            <button className="add-cart detail" onClick={() => {
-                                addToCart(product.id, quantity);
-                                alert("Added To Cart")
-                                }}>Add To Cart</button>
-                        )}
+                                <button className="add-cart detail" onClick={() => {
+                                    alert("Must Be Logged In First!")
+                                    history.push('/login')
+                                    }}>Add To Cart</button>
+                            ) : (
+                                findProductCheck(product.id) ? (
+                                        <button className="add-cart detail" onClick={() => {
+                                            alert("Limit of 10 quantities per item allowed")
+                                            }}>Add To Cart</button>
+                                    ) : (
+                                        <button className="add-cart detail" onClick={() => {
+                                            addToCart(product.id, quantity);
+                                            alert("Added To Cart")
+                                            }}>Add To Cart</button>
+                                ))
+                            }
                         </div>
                     </div>
 
