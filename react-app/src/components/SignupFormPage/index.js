@@ -24,9 +24,9 @@ function SignupFormPage() {
   useEffect(() => {
     const errors = {};
     if (!firstName || firstName.trim().length > 50 || firstName.trim().length < 2)
-      errors.firstName = "First name must be between 2 characters and 50 characters";
+      errors.firstName = "Must be between 2 characters and 50 characters";
     if (!lastName || lastName.trim().length > 50 || lastName.trim().length < 2)
-      errors.lastName = "Last name must be between 2 characters and 50 characters";
+      errors.lastName = "Must be between 2 characters and 50 characters";
     if (!emailValidation(email)) errors.email = "Not a valid email address";
     if (!password || password.length < 6)
       errors.password = "Password must be 6 characters";

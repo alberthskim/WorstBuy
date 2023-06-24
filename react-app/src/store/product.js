@@ -61,7 +61,7 @@ const productsReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case ALL_PRODUCTS:
-            newState = {allProducts: {...action.products}}
+            newState = {...state, allProducts: {...action.products}}
             return newState
         case SINGLE_PRODUCT:
             newState = {...state, singleProduct: {...action.product}}

@@ -10,9 +10,7 @@ function EditReviewForm() {
     const history = useHistory()
     const { productId, reviewId } = useParams()
     const product = useSelector(state => state.products.singleProduct)
-    const reviews = useSelector(state => state.products.singleProduct.reviews)
     const user = useSelector(state => state.session.user)
-    // const currentReview = reviews[reviewId]
 
 
     const [rating, setRating] = useState(0)
@@ -100,9 +98,9 @@ function EditReviewForm() {
                     </div>
 
                     <div className="form-info">
-                        <h2>Edit This Review For This Item</h2>
+                        <h2 className="Review-Item-Title">Edit This Review For This Item</h2>
                         <h2>{product.name}</h2>
-                        <p>{product.model}</p>
+                        <p className="product-model-review">{product.model}</p>
                         <textarea
                             className="review-text"
                             placeholder="Display Name"
@@ -112,7 +110,7 @@ function EditReviewForm() {
                         {validationErrors.displayName && submitted && (
                             <p className="errors">{validationErrors.displayName}</p>
                         )}
-                        <h3>Overall Rating</h3>
+                        <h3 className="overall-rating-header-review">Overall Rating</h3>
                         <div className="stars-for-rating">
                             <div
                                 className={rating >= 1 ? "filled" : "empty"}
@@ -183,10 +181,10 @@ function EditReviewForm() {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             />
+                            <p className="under-review">Summarize your thoughts in a short headline</p>
                             {validationErrors.title && submitted && (
                             <p className="errors">{validationErrors.title}</p>
                             )}
-                            <p className="under-review">Summarize your thoughts in a short headline</p>
                             <textarea
                             className="review-text-info"
                             placeholder="Provide a brief description"
@@ -198,95 +196,101 @@ function EditReviewForm() {
                             <p className="errors">{validationErrors.review}</p>
                             )}
 
-                            <h3>Tell us more (optional)</h3>
+                            <h3 className="tell-us">Tell us more (optional)</h3>
+
                             <div className="quality-value">
-                                <p>Quality</p>
-                                <div className="stars-for-rating">
-                                    <div
-                                        className={qualityRating >= 1 ? "filled" : "empty"}
-                                        onMouseEnter={() => setQualityRating(1)}
-                                        onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
-                                        onClick={() => setQualityStars(1)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={qualityRating >= 2 ? "filled" : "empty"}
-                                        onMouseEnter={() => setQualityRating(2)}
-                                        onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
-                                        onClick={() => setQualityStars(2)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={qualityRating >= 3 ? "filled" : "empty"}
-                                        onMouseEnter={() => setQualityRating(3)}
-                                        onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
-                                        onClick={() => setQualityStars(3)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={qualityRating >= 4 ? "filled" : "empty"}
-                                        onMouseEnter={() => setQualityRating(4)}
-                                        onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
-                                        onClick={() => setQualityStars(4)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={qualityRating >= 5 ? "filled" : "empty"}
-                                        onMouseEnter={() => setQualityRating(5)}
-                                        onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
-                                        onClick={() => setQualityStars(5)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                <div className="qual">
+                                    <p className="quality-header">Quality</p>
+                                    <div className="stars-for-rating">
+                                        <div
+                                            className={qualityRating >= 1 ? "filled" : "empty"}
+                                            onMouseEnter={() => setQualityRating(1)}
+                                            onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
+                                            onClick={() => setQualityStars(1)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={qualityRating >= 2 ? "filled" : "empty"}
+                                            onMouseEnter={() => setQualityRating(2)}
+                                            onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
+                                            onClick={() => setQualityStars(2)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={qualityRating >= 3 ? "filled" : "empty"}
+                                            onMouseEnter={() => setQualityRating(3)}
+                                            onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
+                                            onClick={() => setQualityStars(3)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={qualityRating >= 4 ? "filled" : "empty"}
+                                            onMouseEnter={() => setQualityRating(4)}
+                                            onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
+                                            onClick={() => setQualityStars(4)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={qualityRating >= 5 ? "filled" : "empty"}
+                                            onMouseEnter={() => setQualityRating(5)}
+                                            onMouseLeave={() => {if (!qualityStars) setQualityRating(0)}}
+                                            onClick={() => setQualityStars(5)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <p>Value</p>
-                                <div className="stars-for-rating">
-                                    <div
-                                        className={valueRating >= 1 ? "filled" : "empty"}
-                                        onMouseEnter={() => setValueRating(1)}
-                                        onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
-                                        onClick={() => setValueStars(1)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={valueRating >= 2 ? "filled" : "empty"}
-                                        onMouseEnter={() => setValueRating(2)}
-                                        onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
-                                        onClick={() => setValueStars(2)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={valueRating >= 3 ? "filled" : "empty"}
-                                        onMouseEnter={() => setValueRating(3)}
-                                        onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
-                                        onClick={() => setValueStars(3)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={valueRating >= 4 ? "filled" : "empty"}
-                                        onMouseEnter={() => setValueRating(4)}
-                                        onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
-                                        onClick={() => setValueStars(4)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
-                                    </div>
-                                    <div
-                                        className={valueRating >= 5 ? "filled" : "empty"}
-                                        onMouseEnter={() => setValueRating(5)}
-                                        onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
-                                        onClick={() => setValueStars(5)}
-                                        >
-                                        <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                <div className="val">
+                                    <p className="val-header">Value</p>
+                                    <div className="stars-for-rating">
+                                        <div
+                                            className={valueRating >= 1 ? "filled" : "empty"}
+                                            onMouseEnter={() => setValueRating(1)}
+                                            onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
+                                            onClick={() => setValueStars(1)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={valueRating >= 2 ? "filled" : "empty"}
+                                            onMouseEnter={() => setValueRating(2)}
+                                            onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
+                                            onClick={() => setValueStars(2)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={valueRating >= 3 ? "filled" : "empty"}
+                                            onMouseEnter={() => setValueRating(3)}
+                                            onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
+                                            onClick={() => setValueStars(3)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={valueRating >= 4 ? "filled" : "empty"}
+                                            onMouseEnter={() => setValueRating(4)}
+                                            onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
+                                            onClick={() => setValueStars(4)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
+                                        <div
+                                            className={valueRating >= 5 ? "filled" : "empty"}
+                                            onMouseEnter={() => setValueRating(5)}
+                                            onMouseLeave={() => {if (!valueStars) setValueRating(0)}}
+                                            onClick={() => setValueStars(5)}
+                                            >
+                                            <i className="fa-solid fa-star medium-big-star clickable"></i>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -294,7 +298,7 @@ function EditReviewForm() {
                         <div className="recommendation-area">
                             <div className="choose-option">
                                 <h3>Would you recommend this item?</h3>
-                                <h4>Select Option To Apply</h4>
+                                <p className="option-header">Select Option To Apply</p>
                                 <label>
                                     <input
                                         type="radio"
@@ -313,16 +317,16 @@ function EditReviewForm() {
                                     />
                                     No
                                 </label>
+                                {validationErrors.recommendation && submitted && (
+                                <p className="errors">{validationErrors.recommendation}</p>
+                                )}
                             </div>
-                            {validationErrors.recommendation && submitted && (
-                            <p className="errors">{validationErrors.recommendation}</p>
-                            )}
                         </div>
 
                         <div className="purchased-area">
-                            <h3>Did you purchase this item?</h3>
                             <div className="choose-option">
-                                <h4>Select Option To Apply</h4>
+                                <h3>Did you purchase this item?</h3>
+                                <p className="option-header">Select Option To Apply</p>
                                 <label>
                                     <input
                                         type="radio"
@@ -341,10 +345,10 @@ function EditReviewForm() {
                                     />
                                     No
                                 </label>
+                                {validationErrors.purchased && submitted && (
+                                <p className="errors">{validationErrors.purchased}</p>
+                                )}
                             </div>
-                            {validationErrors.purchased && submitted && (
-                            <p className="errors">{validationErrors.purchased}</p>
-                            )}
                         </div>
                         <button type="submit" className="submit-review-button" onClick={handleReview}>
                             Edit Review
