@@ -62,6 +62,9 @@ li {
   margin-right: 8rem;
 } */
 
+.fa-shopping-cart {
+  font-size: 20px;
+}
 
 .cart-logo {
   position: relative;
@@ -70,12 +73,12 @@ li {
 .cart-logo-amount {
   position: absolute;
   background-color: yellow;
-  padding: 0 5px;
-  font-size: 12px;
+  padding: 0 7px;
+  font-size: 14px;
   border-radius: 10px;
-  right: 10%;
+  right: -7%;
   color: black;
-  bottom: 12px;
+  bottom: 16px;
 }
 
 .cart-logo-amount:hover {

@@ -16,6 +16,39 @@
     color: #0046be;
 }
 
+.login-user-stuff {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    font-size: 20px;
+    background-color: #0046be;
+    color: white;
+}
+
+.login-user {
+    padding: 1rem;
+    text-align: center;
+}
+
+.welcome {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+.logout-button {
+    padding: .5rem 1rem;
+    background-color: #0046be;
+    color: white;
+    border-radius: 5px;
+    margin-top: 1rem;
+    border: 1px solid #0046be;
+    width: 100%;
+}
+
+.nav-modal-button {
+    border: #0046be;
+}
+
 .login-button-nav:hover {
     cursor: pointer;
 }
