@@ -73,10 +73,10 @@ li {
 .cart-logo-amount {
   position: absolute;
   background-color: yellow;
-  padding: 0 7px;
-  font-size: 14px;
-  border-radius: 10px;
-  right: -7%;
+  padding: 0 5px;
+  font-size: 12px;
+  border-radius: 12px;
+  right: -14%;
   color: black;
   bottom: 16px;
 }
