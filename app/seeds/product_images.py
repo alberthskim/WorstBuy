@@ -119,7 +119,7 @@ def seed_product_images():
 
   product_image24 = ProductImage(
     product_id = 12,
-    image_url = 'https://i.imgur.com/HquEnVs.jpg'
+    image_url = 'https://i.imgur.com/nyHygMS.png'
   )
 
   product_image25 = ProductImage(

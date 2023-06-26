@@ -48,7 +48,6 @@ function CartPage() {
                         <div className="cart-items-stuff">
                             {cartItems.map((item) => (
                                 <div className="individual-item">
-                                    {console.log("This is the item",item)}
                                     <Link to={`/products/${item.productId}`} style={{ textDecoration: 'none' }}>
                                     <div className="image-name">
                                         <img className="cart-item-image" src={item.productImage} alt="item-img"/>
