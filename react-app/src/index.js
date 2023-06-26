@@ -8,6 +8,8 @@ import configureStore from "./store";
 import * as sessionActions from "./store/session";
 import App from "./App";
 
+import ScrollToTop from "./helpers/ScrollToTop";
+
 import "./index.css";
 
 const store = configureStore();
@@ -25,6 +27,7 @@ function Root() {
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
+					<ScrollToTop />
 					<App />
 					<Modal />
 				</BrowserRouter>
