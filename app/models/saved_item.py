@@ -23,5 +23,5 @@ class SavedItem(db.Model):
             "productName" : self.product.name,
             "productImage": self.product.image_url,
             "productPrice": self.product.price,
-            "reviews": self.product.reviews
+            "reviews": [reviews.to_dict() for reviews in self.product.reviews]
         }
