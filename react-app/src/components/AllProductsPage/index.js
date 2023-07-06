@@ -7,6 +7,7 @@ import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
 import AddToCartModal from "../AddToCartModal";
 import { useModal } from "../../context/Modal";
+import { addSavedItemThunk, allSavedItemsThunk } from "../../store/savedItem";
 
 
 function AllProductPage() {
@@ -21,6 +22,7 @@ function AllProductPage() {
         dispatch(allProductsThunk())
         if (user) {
             dispatch(allCartItemsThunk(user.id))
+            dispatch(allSavedItemsThunk(user.id))
         }
     }, [dispatch])
 
@@ -94,10 +96,15 @@ function AllProductPage() {
                                 history.push('/login')
                                 }}>Add To Cart</button>
                         ) : (
+                            <>
+                                <button className="add-cart" onClick={() => {
+                                    findProductCheck(product)
+                                }}>Add To Cart</button>
+                                <button className="saved-item" onClick={() => {
+                                    dispatch(addSavedItemThunk(product.id))
+                                }}>Save Item</button>
+                            </>
 
-                            <button className="add-cart" onClick={() => {
-                                findProductCheck(product)
-                            }}>Add To Cart</button>
                         )}
                     </div>
                 ))}

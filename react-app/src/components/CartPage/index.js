@@ -3,11 +3,13 @@ import './cartpage.css'
 import { allCartItemsThunk, deleteAllCartThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
 import React, { useEffect} from 'react'
 import {useHistory, Link} from 'react-router-dom'
+import { allSavedItemsThunk } from '../../store/savedItem'
 
 function CartPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const cartItems = Object.values(useSelector(state => state.cart))
+    const savedItems = Object.values(useSelector(state => state.savedItems))
     const user = useSelector(state => state.session.user)
 
 
@@ -16,6 +18,7 @@ function CartPage() {
             return history.push('/login')
         }
         dispatch(allCartItemsThunk(user.id))
+        dispatch(allSavedItemsThunk(user.id))
     }, [dispatch])
 
     const quantityChange = (productId, quantity) => {
@@ -85,9 +88,21 @@ function CartPage() {
                         <h2>Your cart is empty</h2>
                     </div>
                 )}
-                {/* <div className="cart-bottom-area">
-                    <p>Saved Items</p>
-                </div> */}
+                {savedItems.length ? (
+                    <div className="cart-bottom-area">
+                        {cartItems.map((item) => (
+                            <>
+                                <p>{item.productName}</p>
+                                <img className="cart-item-image" src={item.productImage} />
+                                <p>$ {item.productPrice}</p>
+                            </>
+                        ))}
+                    </div>
+                ): (
+                    <div className="cart-bottom-area">
+                        <p>Saved Items</p>
+                    </div>
+                )}
             </div>
 
 
