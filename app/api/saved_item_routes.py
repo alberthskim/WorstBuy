@@ -5,8 +5,8 @@ from app.models import db, SavedItem
 saved_item_routes = Blueprint('savedItem', __name__)
 
 
-## GET ALL USERS SAVED ITEMS
-@saved_item_routes('/<int:userId>')
+# GET ALL USERS SAVED ITEMS
+@saved_item_routes.route('/<int:userId>')
 def saved_item(userId):
     """
     Grab all users saved Items
@@ -17,7 +17,7 @@ def saved_item(userId):
 
 
 ## CREATE A SAVED ITEMS
-@saved_item_routes('/item', method=['POST'])
+@saved_item_routes.route('/item', methods=['POST'])
 @login_required
 def create_saved_item():
     """
@@ -39,7 +39,7 @@ def create_saved_item():
 
 
 ## DELETE A SAVED ITEMS
-@saved_item_routes('item/delete', methods=['DELETE'])
+@saved_item_routes.route('item/delete', methods=['DELETE'])
 @login_required
 def delete_saved_item():
     """

@@ -64,6 +64,10 @@ const savedItemReducer = (state = initialState, action) => {
             newState = {...state}
             action.savedItems.forEach(savedItem => newState[savedItem.id] = savedItem)
             return newState
+        case ADD_SAVED_ITEM:
+            newState = {...state}
+            newState[action.savedItem.id] = action.savedItem
+            return newState
         default: {
             return state;
         }
