@@ -161,6 +161,7 @@ function SinglePageReviewArea({ productId, allReviews}) {
               </div>
             </div>
 
+            <h3 className="review-image-header">Review Images</h3>
             <div className="review-images-area">
               {reviews.map((image) => (
                 <div className="product-review-image">
@@ -168,16 +169,17 @@ function SinglePageReviewArea({ productId, allReviews}) {
                     null
                   ) : (
                     <>
-                      <h3 className="review-image-header">Review Images</h3>
                       <img className="review-img-url" src={image.reviewUrl} onError={(e) => e.target.src ="https://i.imgur.com/VikcUQA.png"} alt="review-img"/>
                     </>
                   )}
                 </div>
               ))}
-              {user && !reviews.find(review => review.userId === user.id) && (
-                <button className="review-button" onClick={handleClick}>Write a Review</button>
-              )}
             </div>
+              {user && !reviews.find(review => review.userId === user.id) && (
+                <div className="button-area-review">
+                  <button className="review-button" onClick={handleClick}>Write a Review</button>
+                </div>
+              )}
           </div>
         </div>
 
