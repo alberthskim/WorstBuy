@@ -71,17 +71,26 @@
 
 .product-review-image {
     margin-bottom: 1rem;
+    display: flex;
 }
 
 .review-images-area {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: .1rem;
     margin: 1rem;
 }
 
 .review-image-header {
     margin-bottom: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.button-area-review {
+    text-align: center;
 }
 
 .review-button {
