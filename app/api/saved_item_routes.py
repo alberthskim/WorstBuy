@@ -47,7 +47,9 @@ def delete_saved_item():
     """
 
     data = request.get_json()
+    print("⭐️---------------THIS IS THE DATA", data)
     savedItem = SavedItem.query.filter(SavedItem.user_id == data['userId'], SavedItem.product_id == data['productId']).first()
+    print("⭐️--------SAVED ITEM FOUND", savedItem)
     db.session.delete(savedItem)
     db.session.commit()
 

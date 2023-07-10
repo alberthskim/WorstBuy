@@ -15,6 +15,7 @@ function AllProductPage() {
     const history = useHistory()
     const products = Object.values(useSelector(state => state.products.allProducts))
     const cartItems = Object.values(useSelector(state => state.cart))
+    const savedItem = Object.values(useSelector(state => state.savedItems))
     const user = useSelector(state => state.session.user)
     const { setModalContent, setOnModalClose } = useModal();
 
@@ -70,6 +71,16 @@ function AllProductPage() {
         }
     }
 
+    const savedItemExists = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId)
+        if(!findSavedItem) {
+            dispatch(addSavedItemThunk(savedItemId));
+            history.push('/cart')
+        } else {
+            history.push('/cart')
+        }
+    }
+
     return (
         <div className="main-area-product">
             <div className="page-content">
@@ -101,7 +112,7 @@ function AllProductPage() {
                                     findProductCheck(product)
                                 }}>Add To Cart</button>
                                 <button className="saved-item" onClick={() => {
-                                    dispatch(addSavedItemThunk(product.id))
+                                    savedItemExists(product.id)
                                 }}>Save Item</button>
                             </>
 

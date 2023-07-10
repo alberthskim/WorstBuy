@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './cartpage.css'
-import { allCartItemsThunk, deleteAllCartThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
+import { addCartItemThunk, allCartItemsThunk, deleteAllCartThunk, deleteCartItemThunk, updateCartItemThunk } from '../../store/cart'
 import React, { useEffect} from 'react'
 import {useHistory, Link} from 'react-router-dom'
-import { allSavedItemsThunk } from '../../store/savedItem'
+import { addSavedItemThunk, allSavedItemsThunk, deleteSavedItemThunk } from '../../store/savedItem'
 
 function CartPage() {
     const dispatch = useDispatch()
@@ -32,6 +32,61 @@ function CartPage() {
             total += cartItems[i].quantity * cartItems[i].productPrice
         }
         return total
+    }
+
+    const starRating = (rating) => {
+        let stars = []
+        for(let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<i className="fa-solid fa-star" style={{color: '#ffe000'}}></i>)
+            } else {
+                stars.push(<i className="far fa-star" style={{color: 'lightgray'}}></i>)
+            }
+        }
+        return stars
+    }
+
+    const getAverageRating = (reviews) => {
+        let number = 0;
+        let total = reviews.length
+        for (let i = 0; i < reviews.length; i++) {
+          if(reviews[i].rating) {
+            number += reviews[i].rating;
+          } else {
+            total--
+          }
+        }
+        return starRating((number / total).toFixed(1));
+    };
+
+    const itemExists = (productId) => {
+        const existInSaved = savedItems.find(item => item.productId === productId)
+        const existInCart = cartItems.find(item => item.productId === productId)
+        if(existInSaved) {
+            dispatch(deleteCartItemThunk(existInCart.id, existInCart.userId, existInCart.productId))
+            alert("We've moved this to your saved items.")
+        } else {
+            dispatch(deleteCartItemThunk(existInCart.id, existInCart.userId, existInCart.productId))
+            dispatch(addSavedItemThunk(existInCart.productId))
+            alert("We've moved this to your saved items.")
+        }
+    }
+
+    const findProductCheck = (productId) => {
+        const singleCartItem = cartItems.find(item => item.productId === productId)
+        if (!singleCartItem) {
+            dispatch(addCartItemThunk(productId, 1));
+            return
+        }
+
+        let currentCart = Number(singleCartItem.quantity)
+        if (currentCart >= 10) {
+            alert("Limit of 10 quantities per item allowed")
+            return
+        } else {
+            dispatch(addCartItemThunk(productId, 1));
+            return
+        }
     }
 
     const totalItemPrice = totalAmount(cartItems).toFixed(2)
@@ -72,6 +127,7 @@ function CartPage() {
                                                 <option value="10">10</option>
                                             </select>
                                             <p className="remove-item" onClick={() => dispatch(deleteCartItemThunk(item.id, user.id, item.productId))}>remove</p>
+                                            <p className="save-item" onClick={() => itemExists(item.productId)}>save</p>
                                         </div>
                                         <div className="pricing-area">
                                             <p className="single-amount-times">${(item.productPrice * Number(item.quantity)).toFixed(2)}</p>
@@ -88,21 +144,37 @@ function CartPage() {
                         <h2>Your cart is empty</h2>
                     </div>
                 )}
+
                 {savedItems.length ? (
-                    <div className="cart-bottom-area">
-                        {cartItems.map((item) => (
-                            <>
-                                <p>{item.productName}</p>
-                                <img className="cart-item-image" src={item.productImage} />
-                                <p>$ {item.productPrice}</p>
-                            </>
-                        ))}
+                    <div className="saved-bottom-area">
+                        <div className="saved-container">
+                        <h2><i className="far fa-bookmark"></i> Saved Items</h2>
+                            <div className="saved-individual">
+                            {savedItems.map((item) => (
+                                <div className="saved-info-area">
+                                    <i className="fas fa-times modal-x" onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
+                                    <img className="saved-item-image" src={item.productImage} />
+                                    <p>{item.productName}</p>
+                                    <p>{getAverageRating(item.reviews)} ({item.reviews.length})</p>
+                                    <p>$ {item.productPrice}</p>
+                                    <button onClick={() =>
+                                        findProductCheck(item.productId)
+                                    }>Add To Cart</button>
+                                </div>
+                            ))}
+                            </div>
+                        </div>
                     </div>
-                ): (
-                    <div className="cart-bottom-area">
-                        <p>Saved Items</p>
+                ) : (
+                    <div className="saved-bottom-area">
+                        <h2><i className="far fa-bookmark"></i> Saved Items</h2>
+                        <div className="saved-item-no">
+                            <h3>Your list is currently empty</h3>
+                            <p>Need inspiration? Check out <Link to="/" className="rec-link">recommended items</Link>, or search for items to save.</p>
+                        </div>
                     </div>
                 )}
+
             </div>
 
 

@@ -44,9 +44,12 @@ export const addSavedItemThunk = (productId) => async (dispatch) => {
 }
 
 
-export const deleteSavedItemThunk = (savedItemId, productId, userId) => async (dispatch) => {
+export const deleteSavedItemThunk = (savedItemId, userId, productId) => async (dispatch) => {
+    console.log("INSIDE THUNK", savedItemId, productId, userId)
     const response = await fetch(`/api/savedItem/item/delete`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({userId, productId})
     })
 
     if (response.ok) {
@@ -67,6 +70,10 @@ const savedItemReducer = (state = initialState, action) => {
         case ADD_SAVED_ITEM:
             newState = {...state}
             newState[action.savedItem.id] = action.savedItem
+            return newState
+        case DELETE_SAVED_ITEM:
+            newState = {...state}
+            delete newState[action.itemId]
             return newState
         default: {
             return state;
