@@ -16,6 +16,7 @@
 .product-detail-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     border: 1px solid lightgray;
@@ -85,4 +86,17 @@
 .add-cart:hover {
     cursor: pointer;
     box-shadow: 0px 0px 12px gray;
+}
+
+.saved-item {
+    border-style: none;
+    background-color: white;
+}
+
+.saved-item-container {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
 }

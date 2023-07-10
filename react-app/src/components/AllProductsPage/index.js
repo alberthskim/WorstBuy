@@ -7,7 +7,7 @@ import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
 import AddToCartModal from "../AddToCartModal";
 import { useModal } from "../../context/Modal";
-import { addSavedItemThunk, allSavedItemsThunk } from "../../store/savedItem";
+import { addSavedItemThunk, allSavedItemsThunk, deleteSavedItemThunk } from "../../store/savedItem";
 
 
 function AllProductPage() {
@@ -75,9 +75,17 @@ function AllProductPage() {
         const findSavedItem = savedItem.find(item => item.productId === savedItemId)
         if(!findSavedItem) {
             dispatch(addSavedItemThunk(savedItemId));
-            history.push('/cart')
         } else {
             history.push('/cart')
+        }
+    }
+
+    const savedItemCheck = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId)
+        if(findSavedItem) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -111,11 +119,21 @@ function AllProductPage() {
                                 <button className="add-cart" onClick={() => {
                                     findProductCheck(product)
                                 }}>Add To Cart</button>
-                                <button className="saved-item" onClick={() => {
-                                    savedItemExists(product.id)
-                                }}>Save Item</button>
+                                {!savedItemCheck(product.id) ? (
+                                    <div className="saved-item-container">
+                                        <button className="saved-item" onClick={() => {
+                                            savedItemExists(product.id)
+                                        }}><i className="far fa-bookmark saved" style={{color: "#0046be"}}></i> Save</button>
+                                    </div>
+                                ) : (
+                                    <div className="saved-item-container">
+                                        <button className="saved-item" onClick={() => {
+                                            alert("Redirecting To Saved Items List")
+                                            history.push('/cart')
+                                        }}><i className="fas fa-bookmark saved" style={{color: "#0046be"}}></i> Saved</button>
+                                    </div>
+                                )}
                             </>
-
                         )}
                     </div>
                 ))}

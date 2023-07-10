@@ -148,18 +148,22 @@ function CartPage() {
                 {savedItems.length ? (
                     <div className="saved-bottom-area">
                         <div className="saved-container">
-                        <h2><i className="far fa-bookmark"></i> Saved Items</h2>
+                        <h2><i className="far fa-bookmark" style={{color: "#0046be"}}></i> Saved Items</h2>
                             <div className="saved-individual">
                             {savedItems.map((item) => (
                                 <div className="saved-info-area">
-                                    <i className="fas fa-times modal-x" onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
-                                    <img className="saved-item-image" src={item.productImage} />
-                                    <p>{item.productName}</p>
+                                    <div className="x-area">
+                                        <i className="fas fa-times modal-x" onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
+                                    </div>
+                                    <div className="saved-image-area">
+                                        <img className="saved-item-image" src={item.productImage} />
+                                    </div>
+                                    <p className="cart-product-name">{item.productName}</p>
                                     <p>{getAverageRating(item.reviews)} ({item.reviews.length})</p>
                                     <p>$ {item.productPrice}</p>
-                                    <button onClick={() =>
+                                    <button className="save-add-button" onClick={() =>
                                         findProductCheck(item.productId)
-                                    }>Add To Cart</button>
+                                    }><i className="fas fa-shopping-cart" style={{color:"#0046be", fontSize:"13px", paddingRight:".5rem"}}></i> Add To Cart</button>
                                 </div>
                             ))}
                             </div>
@@ -167,7 +171,7 @@ function CartPage() {
                     </div>
                 ) : (
                     <div className="saved-bottom-area">
-                        <h2><i className="far fa-bookmark"></i> Saved Items</h2>
+                        <h2><i className="far fa-bookmark saved" style={{color: "#0046be"}}></i> Saved Items</h2>
                         <div className="saved-item-no">
                             <h3>Your list is currently empty</h3>
                             <p>Need inspiration? Check out <Link to="/" className="rec-link">recommended items</Link>, or search for items to save.</p>
