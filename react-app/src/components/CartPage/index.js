@@ -156,9 +156,9 @@ function CartPage() {
                                         <i className="fas fa-times modal-x" onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
                                     </div>
                                     <div className="saved-image-area">
-                                        <img className="saved-item-image" src={item.productImage} />
+                                        <img className="saved-item-image" src={item.productImage} onClick={() => history.push(`/products/${item.productId}`)}/>
                                     </div>
-                                    <p className="cart-product-name">{item.productName}</p>
+                                    <p className="cart-product-name" onClick={() => history.push(`/products/${item.productId}`)}>{item.productName}</p>
                                     <p>{getAverageRating(item.reviews)} ({item.reviews.length})</p>
                                     <p>$ {item.productPrice}</p>
                                     <button className="save-add-button" onClick={() =>

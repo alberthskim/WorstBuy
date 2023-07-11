@@ -5,6 +5,7 @@ import './singleproductpage.css'
 import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
 import { addCartItemThunk, allCartItemsThunk, addToCart } from "../../store/cart";
+import { addSavedItemThunk } from "../../store/savedItem";
 import AddToCartModal from "../AddToCartModal";
 import { useModal } from "../../context/Modal";
 
@@ -17,6 +18,7 @@ function SingleProductPage() {
     const user = useSelector(state => state.session.user)
     const reviews = product?.reviews
     const cartItems = Object.values(useSelector(state => state.cart))
+    const savedItem = Object.values(useSelector(state => state.savedItems))
     const [quantity, setQuantity] = useState(1)
     const { setModalContent, setOnModalClose } = useModal();
 
@@ -76,6 +78,25 @@ function SingleProductPage() {
         }
     }
 
+    const savedItemExists = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId.id)
+        if(!findSavedItem) {
+            dispatch(addSavedItemThunk(savedItemId));
+        } else {
+            history.push('/cart')
+        }
+    }
+
+
+    const savedItemCheck = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId.id)
+        if(findSavedItem) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     if (!product || !Object.values(product).length) {
         return <div>Loading...</div>
     }
@@ -125,9 +146,22 @@ function SingleProductPage() {
                                     history.push('/login')
                                     }}>Add To Cart</button>
                             ) : (
+                                <>
                                 <button className="add-cart detail" onClick={() => {
                                     findProductCheck(product, quantity)
                                 }}>Add To Cart</button>
+                                {!savedItemCheck(product) ? (
+                                    <button className="saved-item-single" onClick={() => {
+                                        savedItemExists(product.id)
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i></button>
+                                ) : (
+                                    <button className="saved-item-single" onClick={() => {
+                                        alert("Redirecting To Saved Items List")
+                                        history.push('/cart')
+                                    }}><i className="fas fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i></button>
+
+                                )}
+                                </>
                             )}
                         </div>
                     </div>

@@ -56,6 +56,7 @@
 
 .cart-product-name:hover {
     text-decoration: underline;
+    cursor:pointer;
 }
 
 .quantity-price {
@@ -182,6 +183,10 @@
     width: 150px;
     height: 150px;
     object-fit: fill;
+}
+
+.saved-item-image:hover {
+    cursor: pointer;
 }
 
 .saved-info-area > p {
