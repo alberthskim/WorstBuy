@@ -141,10 +141,18 @@ function SingleProductPage() {
                                 <option value="10">Qty 10</option>
                             </select>
                             {!user ? (
+                                <>
                                 <button className="add-cart detail" onClick={() => {
                                     alert("Must Be Logged In First!")
                                     history.push('/login')
-                                    }}>Add To Cart</button>
+                                    }}>Add To Cart
+                                </button>
+                                <button className="saved-item-single" onClick={() => {
+                                    alert("Must Be Logged In First!")
+                                    history.push('/login')
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i>
+                                </button>
+                                </>
                             ) : (
                                 <>
                                 <button className="add-cart detail" onClick={() => {

@@ -102,7 +102,7 @@ function AllProductPage() {
                                 <div className="product-deets">
                                     <h3 className="product-name-all">{product.name}</h3>
                                     <p className="model-num">Model: {product.model}</p>
-                                    <p>{getAverageRating(product.reviews)} ({product.reviews.length})</p>
+                                    <p className="avg-num-ra">{getAverageRating(product.reviews)} ({product.reviews.length})</p>
                                 </div>
                                 <div className="product-price">
                                     <p>$ {product.price}</p>
@@ -110,10 +110,21 @@ function AllProductPage() {
                             </div>
                         </Link>
                         {!user ? (
+                            <>
                             <button className="add-cart" onClick={() => {
                                 alert("Must Be Logged In First!")
                                 history.push('/login')
-                                }}>Add To Cart</button>
+                                }}>Add To Cart
+                            </button>
+                            <div className="saved-item-container">
+                                <button className="saved-item" onClick={() => {
+                                    alert("Must Be Logged In First!")
+                                    history.push('/login')
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be"}}></i> Save
+                                </button>
+                            </div>
+                            </>
+
                         ) : (
                             <>
                                 <button className="add-cart" onClick={() => {

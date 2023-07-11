@@ -153,7 +153,7 @@ function CartPage() {
                             {savedItems.map((item) => (
                                 <div className="saved-info-area">
                                     <div className="x-area">
-                                        <i className="fas fa-times modal-x" onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
+                                        <i className="fas fa-times modal-x" style={{color:"#0046be"}} onClick={() => dispatch(deleteSavedItemThunk(item.id, item.userId, item.productId))}></i>
                                     </div>
                                     <div className="saved-image-area">
                                         <img className="saved-item-image" src={item.productImage} onClick={() => history.push(`/products/${item.productId}`)}/>

@@ -54,6 +54,11 @@
 .model-num {
     font-size: 12px;
     margin-bottom: 1rem;
+    color: gray
+}
+
+.avg-num-ra {
+    color:#0046be;
 }
 
 .product-deets {
@@ -64,6 +69,7 @@
 
 .product-name-all {
     font-weight: bolder;
+    color:#0046be;
 }
 
 .product-price {
