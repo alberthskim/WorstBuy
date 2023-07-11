@@ -125,7 +125,7 @@ function SingleProductPage() {
                     <div className="left-side-right">
                         <div className="ratings">
                             <span>${product.price}</span>
-                            <span>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
+                            <span style={{color:"#0046be"}}>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
                         </div>
                         <div className="quantity-cart">
                             <select className="select-field" value={product.quantity} onChange={quantityChange}>
