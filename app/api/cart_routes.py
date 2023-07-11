@@ -68,6 +68,7 @@ def update_cart():
     Update a cart
     """
     data = request.get_json()
+    print("THIS IS THE DATA RECEIVED", data)
 
 
     #This queries for the CartItem that matches the current user thats logged in and the product that matches what was requested.

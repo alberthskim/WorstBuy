@@ -7,6 +7,7 @@ import { allCartItemsThunk } from "../../store/cart";
 import './allproductspage.css'
 import AddToCartModal from "../AddToCartModal";
 import { useModal } from "../../context/Modal";
+import { addSavedItemThunk, allSavedItemsThunk, deleteSavedItemThunk } from "../../store/savedItem";
 
 
 function AllProductPage() {
@@ -14,6 +15,7 @@ function AllProductPage() {
     const history = useHistory()
     const products = Object.values(useSelector(state => state.products.allProducts))
     const cartItems = Object.values(useSelector(state => state.cart))
+    const savedItem = Object.values(useSelector(state => state.savedItems))
     const user = useSelector(state => state.session.user)
     const { setModalContent, setOnModalClose } = useModal();
 
@@ -21,6 +23,7 @@ function AllProductPage() {
         dispatch(allProductsThunk())
         if (user) {
             dispatch(allCartItemsThunk(user.id))
+            dispatch(allSavedItemsThunk(user.id))
         }
     }, [dispatch])
 
@@ -68,6 +71,24 @@ function AllProductPage() {
         }
     }
 
+    const savedItemExists = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId)
+        if(!findSavedItem) {
+            dispatch(addSavedItemThunk(savedItemId));
+        } else {
+            history.push('/cart')
+        }
+    }
+
+    const savedItemCheck = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId)
+        if(findSavedItem) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
         <div className="main-area-product">
             <div className="page-content">
@@ -81,7 +102,7 @@ function AllProductPage() {
                                 <div className="product-deets">
                                     <h3 className="product-name-all">{product.name}</h3>
                                     <p className="model-num">Model: {product.model}</p>
-                                    <p>{getAverageRating(product.reviews)} ({product.reviews.length})</p>
+                                    <p className="avg-num-ra">{getAverageRating(product.reviews)} ({product.reviews.length})</p>
                                 </div>
                                 <div className="product-price">
                                     <p>$ {product.price}</p>
@@ -89,15 +110,41 @@ function AllProductPage() {
                             </div>
                         </Link>
                         {!user ? (
+                            <>
                             <button className="add-cart" onClick={() => {
                                 alert("Must Be Logged In First!")
                                 history.push('/login')
-                                }}>Add To Cart</button>
-                        ) : (
+                                }}>Add To Cart
+                            </button>
+                            <div className="saved-item-container">
+                                <button className="saved-item" onClick={() => {
+                                    alert("Must Be Logged In First!")
+                                    history.push('/login')
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be"}}></i> Save
+                                </button>
+                            </div>
+                            </>
 
-                            <button className="add-cart" onClick={() => {
-                                findProductCheck(product)
-                            }}>Add To Cart</button>
+                        ) : (
+                            <>
+                                <button className="add-cart" onClick={() => {
+                                    findProductCheck(product)
+                                }}>Add To Cart</button>
+                                {!savedItemCheck(product.id) ? (
+                                    <div className="saved-item-container">
+                                        <button className="saved-item" onClick={() => {
+                                            savedItemExists(product.id)
+                                        }}><i className="far fa-bookmark saved" style={{color: "#0046be"}}></i> Save</button>
+                                    </div>
+                                ) : (
+                                    <div className="saved-item-container">
+                                        <button className="saved-item" onClick={() => {
+                                            alert("Redirecting To Saved Items List")
+                                            history.push('/cart')
+                                        }}><i className="fas fa-bookmark saved" style={{color: "#0046be"}}></i> Saved</button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </div>
                 ))}
