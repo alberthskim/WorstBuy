@@ -16,6 +16,7 @@
 .product-detail-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     border: 1px solid lightgray;
@@ -53,6 +54,11 @@
 .model-num {
     font-size: 12px;
     margin-bottom: 1rem;
+    color: gray
+}
+
+.avg-num-ra {
+    color:#0046be;
 }
 
 .product-deets {
@@ -63,6 +69,7 @@
 
 .product-name-all {
     font-weight: bolder;
+    color:#0046be;
 }
 
 .product-price {
@@ -85,4 +92,17 @@
 .add-cart:hover {
     cursor: pointer;
     box-shadow: 0px 0px 12px gray;
+}
+
+.saved-item {
+    border-style: none;
+    background-color: white;
+}
+
+.saved-item-container {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
 }

@@ -69,7 +69,6 @@ def update_cart():
     """
     data = request.get_json()
 
-
     #This queries for the CartItem that matches the current user thats logged in and the product that matches what was requested.
     cartItem = CartItem.query.filter(CartItem.user_id == data['userId'], CartItem.product_id == data['productId']).first()
 

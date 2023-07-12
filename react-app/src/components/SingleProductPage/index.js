@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { singleProductThunk} from "../../store/product";
+import { allProductsThunk, singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
 import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
 import { addCartItemThunk, allCartItemsThunk, addToCart } from "../../store/cart";
+import { addSavedItemThunk } from "../../store/savedItem";
 import AddToCartModal from "../AddToCartModal";
 import { useModal } from "../../context/Modal";
 
@@ -14,9 +15,11 @@ function SingleProductPage() {
     const history = useHistory()
     const { productId } = useParams();
     const product = useSelector(state => state.products.singleProduct)
+    const allProducts = useSelector(state => state.products.allProducts)
     const user = useSelector(state => state.session.user)
     const reviews = product?.reviews
     const cartItems = Object.values(useSelector(state => state.cart))
+    const savedItem = Object.values(useSelector(state => state.savedItems))
     const [quantity, setQuantity] = useState(1)
     const { setModalContent, setOnModalClose } = useModal();
 
@@ -26,6 +29,7 @@ function SingleProductPage() {
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
+        dispatch(allProductsThunk())
         if (user) {
 			dispatch(allCartItemsThunk(user.id))
 		}
@@ -76,6 +80,25 @@ function SingleProductPage() {
         }
     }
 
+    const savedItemExists = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId.id)
+        if(!findSavedItem) {
+            dispatch(addSavedItemThunk(savedItemId));
+        } else {
+            history.push('/cart')
+        }
+    }
+
+
+    const savedItemCheck = (savedItemId) => {
+        const findSavedItem = savedItem.find(item => item.productId === savedItemId.id)
+        if(findSavedItem) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     if (!product || !Object.values(product).length) {
         return <div>Loading...</div>
     }
@@ -104,7 +127,7 @@ function SingleProductPage() {
                     <div className="left-side-right">
                         <div className="ratings">
                             <span>${product.price}</span>
-                            <span>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
+                            <span style={{color:"#0046be"}}>{getAverageRating(Object.values(product.reviews))} ({Object.values(product.reviews).length})</span>
                         </div>
                         <div className="quantity-cart">
                             <select className="select-field" value={product.quantity} onChange={quantityChange}>
@@ -120,14 +143,35 @@ function SingleProductPage() {
                                 <option value="10">Qty 10</option>
                             </select>
                             {!user ? (
+                                <>
                                 <button className="add-cart detail" onClick={() => {
                                     alert("Must Be Logged In First!")
                                     history.push('/login')
-                                    }}>Add To Cart</button>
+                                    }}>Add To Cart
+                                </button>
+                                <button className="saved-item-single" onClick={() => {
+                                    alert("Must Be Logged In First!")
+                                    history.push('/login')
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i>
+                                </button>
+                                </>
                             ) : (
+                                <>
                                 <button className="add-cart detail" onClick={() => {
                                     findProductCheck(product, quantity)
                                 }}>Add To Cart</button>
+                                {!savedItemCheck(product) ? (
+                                    <button className="saved-item-single" onClick={() => {
+                                        savedItemExists(product.id)
+                                    }}><i className="far fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i></button>
+                                ) : (
+                                    <button className="saved-item-single" onClick={() => {
+                                        alert("Redirecting To Saved Items List")
+                                        history.push('/cart')
+                                    }}><i className="fas fa-bookmark saved" style={{color: "#0046be", border:"1px solid lightgray", padding: ".8rem 1rem", borderRadius: "35px"}}></i></button>
+
+                                )}
+                                </>
                             )}
                         </div>
                     </div>

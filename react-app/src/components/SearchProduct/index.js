@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { allProductsThunk } from "../../store/product";
-import { addCartItemThunk } from "../../store/cart";
-import { Link, useHistory } from "react-router-dom"
-import { allCartItemsThunk } from "../../store/cart";
-import './allproductspage.css'
-import AddToCartModal from "../AddToCartModal";
-import { useModal } from "../../context/Modal";
+import React, {useEffect} from 'react';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { addSavedItemThunk, allSavedItemsThunk, deleteSavedItemThunk } from "../../store/savedItem";
+import { useSelector, useDispatch } from 'react-redux';
+import './SearchProduct.css'
+import { useModal } from "../../context/Modal";
+import { allProductsThunk } from '../../store/product';
+import { allCartItemsThunk, addCartItemThunk } from '../../store/cart';
+import AddToCartModal from "../AddToCartModal";
 
-
-function AllProductPage() {
-    const dispatch = useDispatch()
+function SearchProduct() {
+    const location = useLocation()
     const history = useHistory()
-    const products = Object.values(useSelector(state => state.products.allProducts))
+    const user = useSelector(state => state.session.user)
     const cartItems = Object.values(useSelector(state => state.cart))
     const savedItem = Object.values(useSelector(state => state.savedItems))
-    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
+    const searchInfo = location.state?.searchInfo || [];
+    const word = location.state?.word || [];
     const { setModalContent, setOnModalClose } = useModal();
 
     useEffect(() => {
@@ -26,7 +26,6 @@ function AllProductPage() {
             dispatch(allSavedItemsThunk(user.id))
         }
     }, [dispatch])
-
 
     const starRating = (rating) => {
         let stars = []
@@ -91,10 +90,19 @@ function AllProductPage() {
 
     return (
         <div className="main-area-product">
+            {searchInfo[0] ? (
+                    <p>Results for "{word}"</p>
+                ) : (
+                    <>
+                        <h2>Hmmm, we didn't find anything for "{word}"</h2>
+                        <p style={{fontSize: "14px", paddingTop:"1rem"}}>Try a different search term or check out some of our <Link to="/">recommended</Link> products.</p>
+                    </>
+                )
+            }
             <div className="page-content">
-                {products.map((product) => (
+                {searchInfo.map((product) => (
                     <div className="product-detail-container">
-                        <Link to={`/products/${product.id}`} className="product-details">
+                    <Link to={`/products/${product.id}`} className="product-details">
                             <div className="products">
                                 <div className="pics">
                                     <img className="product-images"src={product.imageUrl} alt="products" />
@@ -153,4 +161,4 @@ function AllProductPage() {
     )
 }
 
-export default AllProductPage;
+export default SearchProduct;
