@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { NavLink, useHistory, Redirect, useLocation, Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { addSavedItemThunk, allSavedItemsThunk, deleteSavedItemThunk } from "../../store/savedItem";
 import { useSelector, useDispatch } from 'react-redux';
 import './SearchProduct.css'

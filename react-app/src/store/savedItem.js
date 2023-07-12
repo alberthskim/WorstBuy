@@ -45,7 +45,6 @@ export const addSavedItemThunk = (productId) => async (dispatch) => {
 
 
 export const deleteSavedItemThunk = (savedItemId, userId, productId) => async (dispatch) => {
-    console.log("INSIDE THUNK", savedItemId, productId, userId)
     const response = await fetch(`/api/savedItem/item/delete`, {
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
