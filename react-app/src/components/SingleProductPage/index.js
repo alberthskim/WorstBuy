@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { singleProductThunk} from "../../store/product";
+import { allProductsThunk, singleProductThunk} from "../../store/product";
 import './singleproductpage.css'
 import { useParams, useHistory} from "react-router-dom";
 import SinglePageReviewArea from "../SinglePageReviewArea";
@@ -15,6 +15,7 @@ function SingleProductPage() {
     const history = useHistory()
     const { productId } = useParams();
     const product = useSelector(state => state.products.singleProduct)
+    const allProducts = useSelector(state => state.products.allProducts)
     const user = useSelector(state => state.session.user)
     const reviews = product?.reviews
     const cartItems = Object.values(useSelector(state => state.cart))
@@ -28,6 +29,7 @@ function SingleProductPage() {
 
     useEffect(() => {
         dispatch(singleProductThunk(productId))
+        dispatch(allProductsThunk())
         if (user) {
 			dispatch(allCartItemsThunk(user.id))
 		}
