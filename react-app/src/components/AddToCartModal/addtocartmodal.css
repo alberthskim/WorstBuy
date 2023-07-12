@@ -22,13 +22,14 @@
 
 .modal-header {
     display: flex;
-    width: 100%;
-    /* justify-content: space-between; */
-    gap: 28rem;
-    padding-left: 4.5rem;
+    justify-content: space-between;
     padding-top: .7rem;
     font-size: 13px;
     color: green;
+}
+
+.added-to-cart {
+    padding-left: 4.5rem;
 }
 
 .continue-x {
@@ -43,6 +44,7 @@
 
 .modal-x {
     color: #0046be;
+    padding-right: 1rem;
 }
 
 .modal-x:hover {
