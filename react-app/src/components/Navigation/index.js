@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import logo from '../../assets/worst-buy.png'
 import './Navigation.css';
 import { allCartItemsThunk } from '../../store/cart';
-import { singleProductThunk } from '../../store/product';
+import { allProductsThunk, singleProductThunk } from '../../store/product';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -15,6 +15,10 @@ function Navigation({ isLoaded }){
 	const products = Object.values(useSelector(state => state.products.allProducts))
 	const [word, setWord] = useState("")
 	const [search, setSearched] = useState(false)
+
+	const [searchStatus, setSearchStatus] = useState(false)
+	const [searchInfo, setSearchInfo] = useState([])
+	const [input, setInput] = useState("")
 
 	useEffect(() => {
 		if (sessionUser) {
@@ -29,6 +33,17 @@ function Navigation({ isLoaded }){
 		return productName.includes(word.toLowerCase()) || productCategory.includes(word.toLowerCase())
 	})
 
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+
+		let searchProducts = products.filter(product => product.name.toLowerCase().includes(word.toLowerCase()) || product.category.toLowerCase().includes(word.toLowerCase()));
+		setInput(word)
+		setSearchInfo(searchProducts)
+		setSearchStatus(true)
+		setSearched(false)
+		setWord("")
+		history.push('/search/results');
+	}
 
 	const quantityAmount = (cart) => {
 		if (!cart.length) return 0;
@@ -40,14 +55,23 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
+
 		<div className="nav-bar-area">
+			{searchStatus && (
+				<Redirect
+				  to={{
+					pathname: '/search/results',
+					state: { searchInfo, word: input }
+				  }}
+				/>
+			  )}
 			<ul className="nav-list">
 				<li>
 					<NavLink exact to="/" id="logo">
-						<img src={logo} className="logo" alt="logo" />
+						<img src={logo} onClick={() => dispatch(allProductsThunk())} className="logo" alt="logo" />
 					</NavLink>
 				</li>
-				<label className="search-bar">
+				<form className="search-bar" onSubmit={handleSubmit} >
 					<input
 						className="search-input"
 						placeholder='What can we help you find today?'
@@ -77,9 +101,9 @@ function Navigation({ isLoaded }){
 					) : null
 					}
 					<div className="search-icon">
-						<i class="fa-solid fa-magnifying-glass" style={{cursor:"pointer"}}></i>
+						<button className="search-enter" type="submit"><i class="fa-solid fa-magnifying-glass" style={{cursor:"pointer"}}></i></button>
 					</div>
-				</label>
+				</form>
 
 				{isLoaded && (
 					<div className="right-corner">

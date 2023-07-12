@@ -11,6 +11,7 @@ import AllProductPage from "./components/AllProductsPage";
 import ReviewForm from "./components/ReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import CartPage from "./components/CartPage";
+import SearchProduct from "./components/SearchProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/search/results">
+            <SearchProduct />
           </Route>
         </Switch>
       )}

@@ -79,6 +79,15 @@ li {
   align-items: center;
 }
 
+.search-enter {
+  border: none;
+  background-color: white;
+}
+
+.fa-magnifying-glass {
+  font-size: 16px;
+}
+
 .right-side-search-area {
   width: 100%;
 }
