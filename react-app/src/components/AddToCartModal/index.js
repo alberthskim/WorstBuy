@@ -33,7 +33,7 @@ function AddToCartModal({product}) {
     return (
         <div className="modal">
             <div className="modal-header">
-                <div>Added to cart</div>
+                <div className="added-to-cart">Added to cart</div>
                 <div className="continue-x">
                     <div className="continue" onClick={closeModal}>Continue Shopping</div>
                     <i className="fas fa-times modal-x" onClick={closeModal}></i>

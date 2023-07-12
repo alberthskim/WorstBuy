@@ -12,6 +12,7 @@ import ReviewForm from "./components/ReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import CartPage from "./components/CartPage";
 import SearchProduct from "./components/SearchProduct";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +52,9 @@ function App() {
           </Route>
           <Route path="/search/results">
             <SearchProduct />
+          </Route>
+          <Route>
+            <ErrorPage />
           </Route>
         </Switch>
       )}
