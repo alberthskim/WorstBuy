@@ -84,7 +84,7 @@ function LandingPage() {
                             <img src={worstphone} className="worst-phone" alt="phone"/>
                             <img src={QrCode} className="qrcode" alt="code"/>
                         </div>
-                        <p className="scan-code">Scan the QR code to check out the site on your phone!</p>
+                        <p className="scan-code">Scan the QR code to check out the my portfolio!</p>
                     </div>
 
                     <div className="bottom-right-side">
